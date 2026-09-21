@@ -26,10 +26,7 @@
         <li><a class="nav-link" onclick="openModal('contact')">Contact</a></li>
       </ul>
 
-      <div class="auth-actions">
-        <button class="btn-nav-outline" onclick="openModal('login')">Login</button>
-        <button class="btn-nav-solid" onclick="openModal('signup')">Sign Up</button>
-      </div>
+
     </div>
   </header>
 
@@ -353,55 +350,6 @@
   </main>
 
   <!-- ================= MODALS ================= -->
-  <!-- Login Modal -->
-  <div class="modal-overlay" id="modal-login">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('login')">✕</button>
-      <h3 class="modal-title">Welcome Back</h3>
-      <p class="modal-sub">Login to manage your donor profile or place blood requests.</p>
-      
-      <div class="form-group">
-        <label>Mobile Number or Email</label>
-        <input type="text" class="form-control" placeholder="+91 9876543210" />
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" placeholder="••••••••" />
-      </div>
-
-      <button class="btn-full-primary" onclick="closeModal('login'); showToast('Successfully logged in!');">Login</button>
-    </div>
-  </div>
-
-  <!-- Sign Up Modal -->
-  <div class="modal-overlay" id="modal-signup">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('signup')">✕</button>
-      <h3 class="modal-title">Join RaktSetu</h3>
-      <p class="modal-sub">Register as a Blood Donor or Healthcare Seeker.</p>
-
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" class="form-control" placeholder="Enter your full name" />
-      </div>
-
-      <div class="form-group">
-        <label>Blood Group</label>
-        <select class="form-control">
-          <option>O+</option><option>O-</option><option>A+</option><option>A-</option>
-          <option>B+</option><option>B-</option><option>AB+</option><option>AB-</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>City</label>
-        <input type="text" class="form-control" placeholder="e.g. Mumbai, Delhi" />
-      </div>
-
-      <button class="btn-full-primary" onclick="closeModal('signup'); showToast('Account created successfully!');">Register Account</button>
-    </div>
-  </div>
 
   <!-- Hospital & Emergency Modals -->
   <div class="modal-overlay" id="modal-hospital">
