@@ -12,14 +12,13 @@
   <!-- ================= SITE HEADER ================= -->
   <header class="site-header">
     <div class="header-container">
-      <a href="#" class="brand-logo" onclick="goTab('home'); return false;">
+      <a href="#" class="brand-logo" onclick="goTab('search'); return false;">
         <div class="logo-icon"></div>
         <div>Rakt<span class="highlight">Setu</span></div>
       </a>
 
       <ul class="nav-menu">
-        <li><a class="nav-link active" data-nav="home" onclick="goTab('home')">Home</a></li>
-        <li><a class="nav-link" data-nav="search" onclick="goTab('search')">Find Donors</a></li>
+        <li><a class="nav-link active" data-nav="search" onclick="goTab('search')">Find Donors</a></li>
         <li><a class="nav-link" data-nav="myavail" onclick="goTab('myavail')">My Availability</a></li>
       </ul>
 
@@ -32,11 +31,7 @@
 
     <!-- Section Navigation Tabs -->
     <div class="section-nav-tabs">
-      <button class="tab-btn active" data-tab="home" onclick="goTab('home')">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-        Overview & Hero
-      </button>
-      <button class="tab-btn" data-tab="search" onclick="goTab('search')">
+      <button class="tab-btn active" data-tab="search" onclick="goTab('search')">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         Find Donors
       </button>
@@ -46,157 +41,8 @@
       </button>
     </div>
 
-    <!-- ================= VIEW 1: HOME ================= -->
-    <section class="page-view active" id="view-home">
-      <!-- HERO BANNER CARD -->
-      <div class="hero-card">
-        <div class="hero-glow"></div>
-        <div class="hero-content">
-          <div class="hero-badge">
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
-            BE A HERO • DONATE BLOOD
-          </div>
-          <h1 class="hero-title">
-            Connecting <span class="accent">Blood Donors</span> with Those in Need
-          </h1>
-          <p class="hero-desc">
-            RaktSetu makes blood donation and healthcare support simple, fast and effective. Find verified, reliable donors in real-time.
-          </p>
-          <div class="hero-actions">
-            <button class="btn-hero-primary" onclick="goTab('myavail')">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-              Donate Blood →
-            </button>
-            <button class="btn-hero-secondary" onclick="goTab('search')">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-              Find Donors
-            </button>
-          </div>
-        </div>
-
-        <!-- HERO RIGHT VISUAL ART -->
-        <div class="hero-visual">
-          <div class="blood-bag-container">
-            <svg class="blood-bag-svg" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Hanger Tube -->
-              <path d="M100 0 V20" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="100" cy="10" r="6" fill="none" stroke="#CBD5E1" stroke-width="3"/>
-              
-              <!-- Main Bag Outline -->
-              <rect x="30" y="30" width="140" height="200" rx="16" fill="rgba(255,255,255,0.92)" stroke="#E2E8F0" stroke-width="3"/>
-              
-              <!-- Blood Content Fill -->
-              <rect x="36" y="70" width="128" height="152" rx="10" fill="url(#bloodGradient)"/>
-              
-              <!-- Label Sticker -->
-              <rect x="55" y="85" width="90" height="70" rx="6" fill="#FFFFFF" shadow="0 2px 4px rgba(0,0,0,0.1)"/>
-              <path d="M100 95 C100 95, 88 110, 88 118 A12 12 0 0 0 112 118 C112 110, 100 95, 100 95 Z" fill="#D91B24"/>
-              <text x="100" y="134" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1E293B" text-anchor="middle">Save Lives</text>
-              <text x="100" y="145" font-family="sans-serif" font-size="8" fill="#D91B24" text-anchor="middle" font-weight="600">Donate Blood</text>
-              
-              <!-- Bottom Outflow Tube forming Heart -->
-              <path d="M100 230 Q 100 260 140 250 T 170 210 Q 180 180 140 170 C 110 160 100 200 100 200 C 100 200 90 160 60 170 C 20 180 30 210 60 250 Q 100 260 100 230" fill="none" stroke="#D91B24" stroke-width="5" stroke-linecap="round"/>
-              
-              <defs>
-                <linearGradient id="bloodGradient" x1="100" y1="70" x2="100" y2="222" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#EF4444"/>
-                  <stop offset="1" stop-color="#991B1B"/>
-                </linearGradient>
-              </defs>
-            </svg>
-
-            <div class="hero-handwriting">
-              Every<br/>Drop<br/>Counts ♡
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- QUICK ACTION FEATURE CARDS -->
-      <div class="quick-features-grid">
-        <div class="feature-card" onclick="goTab('myavail')">
-          <div class="fc-left">
-            <div class="fc-icon">💧</div>
-            <div class="fc-info">
-              <h4>Save Lives</h4>
-              <p>Your donation matters</p>
-            </div>
-          </div>
-          <div class="fc-arrow">→</div>
-        </div>
-
-        <div class="feature-card" onclick="goTab('search')">
-          <div class="fc-left">
-            <div class="fc-icon">👤</div>
-            <div class="fc-info">
-              <h4>Find Donors</h4>
-              <p>Quick & easy search</p>
-            </div>
-          </div>
-          <div class="fc-arrow">→</div>
-        </div>
-
-        <div class="feature-card" onclick="openModal('hospital')">
-          <div class="fc-left">
-            <div class="fc-icon">🏥</div>
-            <div class="fc-info">
-              <h4>Hospital Support</h4>
-              <p>Real-time blood stock</p>
-            </div>
-          </div>
-          <div class="fc-arrow">→</div>
-        </div>
-
-        <div class="feature-card" onclick="openModal('contact')">
-          <div class="fc-left">
-            <div class="fc-icon">👥</div>
-            <div class="fc-info">
-              <h4>Build Community</h4>
-              <p>Together we can</p>
-            </div>
-          </div>
-          <div class="fc-arrow">→</div>
-        </div>
-      </div>
-
-      <!-- IMPACT BANNER -->
-      <div class="impact-banner">
-        <div class="impact-left">
-          <div class="impact-tag">— OUR IMPACT</div>
-          <h2>A small step from you can make a <span class="highlight">big difference.</span></h2>
-          <p>Every blood donation saves lives. Together we can build a healthier and stronger community with instant availability updates.</p>
-        </div>
-
-        <div class="impact-stats-grid">
-          <div class="stat-item">
-            <div class="stat-icon">👥</div>
-            <div class="stat-num">5,240+</div>
-            <div class="stat-lbl">Total Donors</div>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-icon">🏥</div>
-            <div class="stat-num">120+</div>
-            <div class="stat-lbl">Partner Hospitals</div>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-icon">❤️</div>
-            <div class="stat-num">8,900+</div>
-            <div class="stat-lbl">Lives Helped</div>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-icon">🩸</div>
-            <div class="stat-num">24/7</div>
-            <div class="stat-lbl">Emergency Support</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= VIEW 2: FIND DONORS ================= -->
-    <section class="page-view" id="view-search">
+    <!-- ================= VIEW 1: FIND DONORS ================= -->
+    <section class="page-view active" id="view-search">
       <div class="view-header">
         <h2>Find Available Donors</h2>
         <p>Search by blood group and city to find available donors in your area. Results are sorted by reliability score.</p>
