@@ -21,9 +21,6 @@
         <li><a class="nav-link active" data-nav="home" onclick="goTab('home')">Home</a></li>
         <li><a class="nav-link" data-nav="search" onclick="goTab('search')">Find Donors</a></li>
         <li><a class="nav-link" data-nav="myavail" onclick="goTab('myavail')">My Availability</a></li>
-        <li><a class="nav-link" onclick="openModal('hospital')">Hospital Support</a></li>
-        <li><a class="nav-link" onclick="openModal('emergency')">Emergency</a></li>
-        <li><a class="nav-link" onclick="openModal('contact')">Contact</a></li>
       </ul>
 
 
@@ -349,44 +346,6 @@
 
   </main>
 
-  <!-- ================= MODALS ================= -->
-
-  <!-- Hospital & Emergency Modals -->
-  <div class="modal-overlay" id="modal-hospital">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('hospital')">✕</button>
-      <h3 class="modal-title">Hospital Partner Network</h3>
-      <p class="modal-sub">Connecting with over 120+ verified partner hospitals across major cities.</p>
-      <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
-        Hospitals can view real-time available donor inventories and issue high-priority emergency alerts directly to matching donors within a 15km radius.
-      </p>
-      <button class="btn-full-primary" onclick="closeModal('hospital')">Got It</button>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-emergency">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('emergency')">✕</button>
-      <h3 class="modal-title" style="color:var(--primary-red);">🚨 Emergency Blood Request</h3>
-      <p class="modal-sub">Need urgent blood unit dispatch?</p>
-      <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
-        Our emergency helpline broadcasts immediate alerts to active donors on standby. Call emergency hotline <b>1800-RAKTSETU</b> for instant assistance.
-      </p>
-      <button class="btn-full-primary" onclick="closeModal('emergency')">Close</button>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-contact">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('contact')">✕</button>
-      <h3 class="modal-title">Contact Community Team</h3>
-      <p class="modal-sub">Have questions or want to host a blood donation drive?</p>
-      <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
-        Reach out to us at support@raktsetu.org or connect with our regional coordinators.
-      </p>
-      <button class="btn-full-primary" onclick="closeModal('contact')">Close</button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
