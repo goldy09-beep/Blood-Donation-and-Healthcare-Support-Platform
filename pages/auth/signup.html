@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | RaktSetu</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-logo">
+            🩸 Rakt<span>Setu</span>
+        </div>
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Join RaktSetu and make a difference.
+        </p>
+
+
+        <form id="signupForm" class="auth-form">
+
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Create password" required>
+
+
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword"
+                   placeholder="Confirm password" required>
+
+
+            <label>Role</label>
+            <select id="userRole" required>
+                <option value="">Select Role</option>
+                <option value="Donor">Donor</option>
+                <option value="Hospital">Hospital</option>
+                <option value="Volunteer">Volunteer</option>
+                <option value="Recipient">Recipient</option>
+            </select>
+
+
+            <button type="submit" class="form-btn">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="switch-text">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+
+
+    <script src="../../js/auth.js"></script>
+
+</body>
+</html>
