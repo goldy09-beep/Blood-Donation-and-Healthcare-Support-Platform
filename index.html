@@ -1,5 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
+ feature/govind
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RaktSetu — Blood Donation & Healthcare Support Platform</title>
+  <meta name="description" content="Connecting blood donors with those in need. RaktSetu makes blood donation and healthcare support simple, fast and effective." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= SITE HEADER ================= -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand-logo" onclick="goTab('search'); return false;">
+        <div class="logo-icon"></div>
+        <div>Rakt<span class="highlight">Setu</span></div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a class="nav-link active" data-nav="search" onclick="goTab('search')">Find Donors</a></li>
+        <li><a class="nav-link" data-nav="myavail" onclick="goTab('myavail')">My Availability</a></li>
+      </ul>
+
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN WRAPPER ================= -->
+  <main class="main-wrapper">
+
+    <!-- Section Navigation Tabs -->
+    <div class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="search" onclick="goTab('search')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        Find Donors
+      </button>
+      <button class="tab-btn" data-tab="myavail" onclick="goTab('myavail')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        My Availability
+      </button>
+    </div>
+
+    <!-- ================= VIEW 1: FIND DONORS ================= -->
+    <section class="page-view active" id="view-search">
+      <div class="view-header">
+        <h2>Find Available Donors</h2>
+        <p>Search by blood group and city to find available donors in your area. Results are sorted by reliability score.</p>
+      </div>
+
+      <div class="filters-card">
+        <div class="filters-grid">
+          <div class="filter-group">
+            <label>Blood Group</label>
+            <select id="f-bg" class="form-control" onchange="runSearch()">
+              <option value="">All blood groups</option>
+              <option>O+</option><option>O-</option><option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option><option>AB+</option><option>AB-</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>City</label>
+            <input type="text" id="f-city" class="form-control" placeholder="e.g., Mumbai, Delhi" oninput="runSearch()" />
+          </div>
+
+          <div class="filter-group">
+            <label>Availability</label>
+            <select id="f-avail" class="form-control" onchange="runSearch()">
+              <option value="all">All donors</option>
+              <option value="available">Available now</option>
+              <option value="unavailable">Not available</option>
+            </select>
+          </div>
+
+          <div class="filter-group" style="display:flex; align-items:flex-end;">
+            <button class="btn-filter-search" onclick="runSearch()">Search Donors</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-head">
+        <div class="results-count" id="results-count">10 donors found</div>
+        <div class="results-sort">Sorted by reliability score</div>
+      </div>
+
+      <div class="donor-grid" id="donor-grid"></div>
+      
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <h3>No matching donors found</h3>
+        <p>Try adjusting your blood group or city filters.</p>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: MY AVAILABILITY ================= -->
+    <section class="page-view" id="view-myavail">
+      <div class="view-header">
+        <h2>My Donation Availability</h2>
+        <p>Manage when you're available to donate. Hospitals and patients only see you while your window is active.</p>
+      </div>
+
+      <div class="avail-layout">
+        <!-- Toggle card -->
+        <div class="card-box">
+          <h3>Donation Availability</h3>
+
+          <div class="status-box" id="status-box">
+            <div class="status-label">Current Status</div>
+            <div class="status-value">
+              <span class="status-dot" id="status-dot"></span>
+              <span id="status-text">Not Available</span>
+            </div>
+            <div class="status-sub" id="status-sub">Currently inactive</div>
+          </div>
+
+          <div class="toast-banner" id="toast-banner"></div>
+
+          <div class="form-group">
+            <label>Make me available for:</label>
+            <div class="toggle-row">
+              <select id="duration-select" class="form-control">
+                <option value="1">1 hour</option>
+                <option value="2">2 hours</option>
+                <option value="4">4 hours</option>
+                <option value="6" selected>6 hours</option>
+                <option value="12">12 hours</option>
+                <option value="24">24 hours</option>
+              </select>
+              <button class="btn-filter-search" style="width:auto; padding:10px 20px;" onclick="setAvailability()">Set</button>
+            </div>
+          </div>
+
+          <button class="btn-secondary-outline" style="margin-bottom:18px;" onclick="expireAvailability()">Turn Off Availability Now</button>
+
+          <div class="info-tip">
+            💡 <b>Tip:</b> Your availability automatically expires after the duration you set — the list always reflects "now", not "ever".
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="stack-vertical">
+          <div class="card-box">
+            <h3>Your Profile</h3>
+            <div class="row-line"><span class="k">Name</span><span class="v">Rajesh Kumar</span></div>
+            <div class="row-line"><span class="k">Blood Group</span><span class="v mono" style="color:var(--primary-red);">O+</span></div>
+            <div class="row-line"><span class="k">City</span><span class="v">Mumbai</span></div>
+            <div class="row-line"><span class="k">Phone</span><span class="v">+91-9876543210</span></div>
+          </div>
+
+          <div class="card-box">
+            <h3>Donation History</h3>
+            <div class="status-label">Reliability Score</div>
+            <div style="display:flex; align-items:flex-end; gap:6px; margin:4px 0 6px;">
+              <span style="font-size:32px; font-weight:800; color:var(--primary-red);">62</span>
+              <span style="font-size:13px; color:var(--text-muted); margin-bottom:4px;">/ 100</span>
+            </div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Based on response history to donation requests</div>
+
+            <div class="stat-triple">
+              <div><div class="num">8</div><div class="lbl">Total Matches</div></div>
+              <div class="stat-accept"><div class="num">5</div><div class="lbl">Accepted</div></div>
+              <div><div class="num">2</div><div class="lbl">Declined</div></div>
+            </div>
+
+            <div style="padding-top:14px; border-top:1px solid var(--border-color); margin-top:14px;">
+              <div style="font-size:13px; color:var(--text-muted); margin-bottom:4px;">Acceptance Rate</div>
+              <div class="progress-track"><div class="progress-fill" style="width:63%;"></div></div>
+              <div style="font-size:14px; font-weight:700;">63%</div>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Donation Eligibility</h3>
+            <div style="background:var(--success-soft); border:1px solid #BFE6CB; border-radius:8px; padding:12px 14px;">
+              <div style="font-weight:700; color:var(--success-green);">✓ Eligible to donate</div>
+              <div style="font-size:13px; color:#1E8449; margin-top:2px;">It's been more than 90 days since your last donation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: DONOR DETAIL ================= -->
+    <section class="page-view" id="view-detail">
+      <!-- Dynamic populated via script.js -->
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <p>© 2026 RaktSetu Healthcare Support Platform · Modern Modular Edition</p>
+    </footer>
+
+  </main>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
 
 <head>
     <meta charset="UTF-8">
@@ -214,3 +412,4 @@
 
 </body>
 </html>
+dev
