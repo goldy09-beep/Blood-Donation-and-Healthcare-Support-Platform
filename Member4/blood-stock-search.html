@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Stock Search — RaktSetu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <nav class="mainnav">
+      <a href="hospital-inventory.html">Inventory</a>
+      <a href="blood-stock-search.html">Stock Search</a>
+      <a href="healthcare-info.html">Healthcare Info</a>
+      <a href="volunteer-dashboard.html">Volunteers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <p class="kicker">Blood Stock Search</p>
+  <h1>Find blood stock near you</h1>
+  <p>Search hospitals by city and blood group to see who currently has stock available.</p>
+</div>
+
+<main>
+  <div class="card" style="margin-bottom: 28px;">
+    <h2>Search</h2>
+    <p class="sub">Basic search form — live filtering of results will be added next.</p>
+
+    <form id="searchForm" class="js-basic-form" data-success="Showing sample matches below for this search.">
+      <div class="field-row">
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="e.g. Mathura">
+        </div>
+        <div class="field">
+          <label for="searchGroup">Blood group</label>
+          <select id="searchGroup" name="searchGroup">
+            <option value="">Any</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>O+</option>
+            <option>O-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Search stock</button>
+      <div class="form-msg"></div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Sample results</h2>
+    <p class="sub">Placeholder hospitals — will connect to real inventory data at 100%.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Hospital</th>
+          <th>City</th>
+          <th>Blood group</th>
+          <th>Available</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>City Care Hospital</td>
+          <td>Mathura</td>
+          <td>O+</td>
+          <td><span class="stock-pill"><span class="stock-dot high"></span>42 units</span></td>
+          <td>+91 98XXXXXX01</td>
+        </tr>
+        <tr>
+          <td>Sanjeevani Hospital</td>
+          <td>Mathura</td>
+          <td>B-</td>
+          <td><span class="stock-pill"><span class="stock-dot mid"></span>9 units</span></td>
+          <td>+91 98XXXXXX02</td>
+        </tr>
+        <tr>
+          <td>Prakash Nursing Home</td>
+          <td>Vrindavan</td>
+          <td>AB-</td>
+          <td><span class="stock-pill"><span class="stock-dot low"></span>2 units</span></td>
+          <td>+91 98XXXXXX03</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>RaktSetu — Hospital &amp; Healthcare module · Member 4</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

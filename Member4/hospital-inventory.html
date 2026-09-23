@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Inventory — RaktSetu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <nav class="mainnav">
+      <a href="hospital-inventory.html">Inventory</a>
+      <a href="blood-stock-search.html">Stock Search</a>
+      <a href="healthcare-info.html">Healthcare Info</a>
+      <a href="volunteer-dashboard.html">Volunteers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <p class="kicker">Hospital Inventory</p>
+  <h1>Track and update your blood stock</h1>
+  <p>See how many units of each blood group your hospital currently holds, and log new stock as it comes in.</p>
+</div>
+
+<main>
+  <div class="grid-two">
+
+    <div class="card">
+      <h2>Add / update stock</h2>
+      <p class="sub">Enter a blood group and the number of units to record it.</p>
+
+      <form id="stockForm" class="js-basic-form" data-success="Stock entry recorded.">
+        <div class="field">
+          <label for="hospitalName">Hospital name</label>
+          <input type="text" id="hospitalName" name="hospitalName" placeholder="e.g. City Care Hospital" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bloodGroup">Blood group</label>
+            <select id="bloodGroup" name="bloodGroup" required>
+              <option value="">Select</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>O+</option>
+              <option>O-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="units">Units (in bags)</label>
+            <input type="number" id="units" name="units" min="0" placeholder="0" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="lastUpdated">Last updated</label>
+          <input type="date" id="lastUpdated" name="lastUpdated">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save stock entry</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Current stock</h2>
+      <p class="sub">Sample data — will load from saved entries once storage is connected.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Blood group</th>
+            <th>Units</th>
+            <th>Status</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>O+</td>
+            <td>42</td>
+            <td><span class="stock-pill"><span class="stock-dot high"></span>Healthy</span></td>
+            <td>18 Sep</td>
+          </tr>
+          <tr>
+            <td>A+</td>
+            <td>27</td>
+            <td><span class="stock-pill"><span class="stock-dot high"></span>Healthy</span></td>
+            <td>17 Sep</td>
+          </tr>
+          <tr>
+            <td>B-</td>
+            <td>9</td>
+            <td><span class="stock-pill"><span class="stock-dot mid"></span>Moderate</span></td>
+            <td>15 Sep</td>
+          </tr>
+          <tr>
+            <td>AB-</td>
+            <td>2</td>
+            <td><span class="stock-pill"><span class="stock-dot low"></span>Critical</span></td>
+            <td>12 Sep</td>
+          </tr>
+          <tr>
+            <td>O-</td>
+            <td>5</td>
+            <td><span class="stock-pill"><span class="stock-dot low"></span>Critical</span></td>
+            <td>10 Sep</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<footer>RaktSetu — Hospital &amp; Healthcare module · Member 4</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

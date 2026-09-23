@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer Dashboard — RaktSetu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <nav class="mainnav">
+      <a href="hospital-inventory.html">Inventory</a>
+      <a href="blood-stock-search.html">Stock Search</a>
+      <a href="healthcare-info.html">Healthcare Info</a>
+      <a href="volunteer-dashboard.html">Volunteers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <p class="kicker">Volunteer Dashboard</p>
+  <h1>Volunteers keeping the network running</h1>
+  <p>A quick look at who's helping organise drives, and a form to register new volunteers.</p>
+</div>
+
+<main>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="num">18</div>
+      <div class="label">Active volunteers</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">7</div>
+      <div class="label">Drives organised</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">134</div>
+      <div class="label">Donors connected</div>
+    </div>
+  </div>
+
+  <div class="grid-two">
+
+    <div class="card">
+      <h2>Register as volunteer</h2>
+      <p class="sub">Basic sign-up form for now — will save to the volunteer list once storage is connected.</p>
+
+      <form id="volunteerForm" class="js-basic-form" data-success="Thanks for signing up — you're on the list.">
+        <div class="field">
+          <label for="volName">Full name</label>
+          <input type="text" id="volName" name="volName" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="volCity">City</label>
+          <input type="text" id="volCity" name="volCity" placeholder="e.g. Mathura" required>
+        </div>
+        <div class="field">
+          <label for="volPhone">Phone number</label>
+          <input type="tel" id="volPhone" name="volPhone" placeholder="10-digit number" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign up</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Current volunteers</h2>
+      <p class="sub">Sample list — pulled from registrations once saved.</p>
+
+      <div class="volunteer-row">
+        <div class="avatar">RP</div>
+        <div>
+          <div class="volunteer-name">Riya Pandey</div>
+          <div class="volunteer-meta">Mathura · 3 drives organised</div>
+        </div>
+        <span class="badge">Top volunteer</span>
+      </div>
+
+      <div class="volunteer-row">
+        <div class="avatar">AK</div>
+        <div>
+          <div class="volunteer-name">Aman Kumar</div>
+          <div class="volunteer-meta">Vrindavan · 2 drives organised</div>
+        </div>
+      </div>
+
+      <div class="volunteer-row">
+        <div class="avatar">SS</div>
+        <div>
+          <div class="volunteer-name">Sana Sheikh</div>
+          <div class="volunteer-meta">Mathura · 1 drive organised</div>
+        </div>
+      </div>
+
+      <div class="volunteer-row">
+        <div class="avatar">DV</div>
+        <div>
+          <div class="volunteer-name">Dev Verma</div>
+          <div class="volunteer-meta">Govardhan · 1 drive organised</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<footer>RaktSetu — Hospital &amp; Healthcare module · Member 4</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
