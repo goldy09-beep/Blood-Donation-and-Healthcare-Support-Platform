@@ -2,9 +2,9 @@
    RaktSetu — Member 4: Hospital & Healthcare
    Shared stylesheet
    ============================================ */
- 
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
- 
+
 :root {
   --crimson: #E5222E;
   --crimson-dark: #C21823;
@@ -18,15 +18,15 @@
   --amber-soft: #FBF0DE;
   --muted: #71686A;
   --red-soft: #FDEBEC;
- 
+
   --font-display: 'Poppins', 'Segoe UI', sans-serif;
   --font-body: 'Inter', 'Segoe UI', sans-serif;
 }
- 
+
 * { box-sizing: border-box; }
- 
+
 html { scroll-behavior: smooth; }
- 
+
 body {
   margin: 0;
   background: var(--paper);
@@ -35,18 +35,18 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
- 
+
 a { color: inherit; }
- 
+
 img { max-width: 100%; }
- 
+
 /* ---------- Top bar ---------- */
 .topbar {
   background: #FFFFFF;
   color: var(--ink);
   border-bottom: 1px solid var(--line);
 }
- 
+
 .topbar-inner {
   max-width: 1080px;
   margin: 0 auto;
@@ -56,7 +56,7 @@ img { max-width: 100%; }
   justify-content: space-between;
   height: 64px;
 }
- 
+
 .brand {
   font-family: var(--font-display);
   font-weight: 700;
@@ -68,9 +68,9 @@ img { max-width: 100%; }
   text-decoration: none;
   color: var(--ink);
 }
- 
+
 .brand span { color: var(--crimson); }
- 
+
 .brand small {
   font-family: var(--font-body);
   font-weight: 600;
@@ -78,13 +78,13 @@ img { max-width: 100%; }
   color: var(--muted);
   letter-spacing: 0.3px;
 }
- 
+
 nav.mainnav {
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
 }
- 
+
 nav.mainnav a {
   text-decoration: none;
   color: var(--ink);
@@ -94,28 +94,28 @@ nav.mainnav a {
   border-radius: 20px;
   transition: background 0.15s ease, color 0.15s ease;
 }
- 
+
 nav.mainnav a:hover { background: var(--red-soft); color: var(--crimson); }
- 
+
 nav.mainnav a.active {
   background: var(--crimson);
   color: #fff;
 }
- 
+
 /* ---------- Page header ---------- */
 .page-head {
   max-width: 1080px;
   margin: 0 auto;
   padding: 48px 24px 28px;
 }
- 
+
 .page-head .kicker {
   color: var(--teal);
   font-weight: 600;
   font-size: 0.85rem;
   margin: 0 0 6px;
 }
- 
+
 .page-head h1 {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 3.2vw, 2.6rem);
@@ -123,55 +123,55 @@ nav.mainnav a.active {
   font-weight: 600;
   max-width: 20ch;
 }
- 
+
 .page-head p {
   color: var(--muted);
   max-width: 62ch;
   font-size: 1.02rem;
   margin: 0;
 }
- 
+
 /* ---------- Layout ---------- */
 main {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 24px 64px;
 }
- 
+
 .grid-two {
   display: grid;
   grid-template-columns: 1.1fr 1.4fr;
   gap: 28px;
 }
- 
+
 @media (max-width: 800px) {
   .grid-two { grid-template-columns: 1fr; }
   .topbar-inner { flex-direction: column; height: auto; padding: 14px 20px; gap: 10px; }
 }
- 
+
 .card {
   background: var(--paper-raised);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 24px;
 }
- 
+
 .card h2 {
   font-family: var(--font-display);
   font-size: 1.3rem;
   margin: 0 0 4px;
   font-weight: 600;
 }
- 
+
 .card .sub {
   color: var(--muted);
   font-size: 0.92rem;
   margin: 0 0 18px;
 }
- 
+
 /* ---------- Forms ---------- */
 .field { margin-bottom: 16px; }
- 
+
 .field label {
   display: block;
   font-size: 0.88rem;
@@ -179,7 +179,7 @@ main {
   margin-bottom: 6px;
   color: var(--ink);
 }
- 
+
 .field input,
 .field select,
 .field textarea {
@@ -192,7 +192,7 @@ main {
   background: var(--paper);
   color: var(--ink);
 }
- 
+
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
@@ -200,17 +200,17 @@ main {
   outline-offset: 1px;
   background: #fff;
 }
- 
+
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
- 
+
 @media (max-width: 480px) {
   .field-row { grid-template-columns: 1fr; }
 }
- 
+
 .btn {
   display: inline-block;
   border: none;
@@ -222,19 +222,19 @@ main {
   cursor: pointer;
   transition: transform 0.1s ease, background 0.15s ease;
 }
- 
+
 .btn-primary { background: var(--crimson); color: #fff; }
 .btn-primary:hover { background: var(--crimson-dark); }
- 
+
 .btn-outline {
   background: transparent;
   border: 1px solid var(--line);
   color: var(--ink);
 }
 .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
- 
+
 .btn:active { transform: scale(0.98); }
- 
+
 .form-msg {
   margin-top: 14px;
   padding: 10px 14px;
@@ -242,28 +242,28 @@ main {
   font-size: 0.9rem;
   display: none;
 }
- 
+
 .form-msg.show { display: block; }
- 
+
 .form-msg.success {
   background: var(--teal-soft);
   color: var(--teal);
   border: 1px solid #bfdcd4;
 }
- 
+
 /* ---------- Tables ---------- */
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.94rem;
 }
- 
+
 th, td {
   text-align: left;
   padding: 12px 14px;
   border-bottom: 1px solid var(--line);
 }
- 
+
 th {
   color: var(--muted);
   font-weight: 600;
@@ -271,21 +271,21 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
- 
+
 .stock-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-weight: 600;
 }
- 
+
 .stock-dot {
   width: 8px; height: 8px; border-radius: 50%;
 }
 .stock-dot.high { background: var(--teal); }
 .stock-dot.mid { background: var(--amber); }
 .stock-dot.low { background: var(--crimson); }
- 
+
 /* ---------- Stat cards ---------- */
 .stat-grid {
   display: grid;
@@ -293,14 +293,14 @@ th {
   gap: 16px;
   margin: 8px 0 36px;
 }
- 
+
 .stat-card {
   background: var(--paper-raised);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 20px;
 }
- 
+
 .stat-card .num {
   font-family: var(--font-display);
   font-size: 2.1rem;
@@ -308,13 +308,13 @@ th {
   color: var(--crimson);
   line-height: 1;
 }
- 
+
 .stat-card .label {
   margin-top: 8px;
   color: var(--muted);
   font-size: 0.88rem;
 }
- 
+
 /* ---------- Volunteer list ---------- */
 .volunteer-row {
   display: flex;
@@ -323,9 +323,9 @@ th {
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
 }
- 
+
 .volunteer-row:last-child { border-bottom: none; }
- 
+
 .avatar {
   width: 42px; height: 42px;
   border-radius: 50%;
@@ -336,10 +336,10 @@ th {
   font-family: var(--font-display);
   flex-shrink: 0;
 }
- 
+
 .volunteer-name { font-weight: 600; }
 .volunteer-meta { color: var(--muted); font-size: 0.85rem; }
- 
+
 .badge {
   margin-left: auto;
   font-size: 0.78rem;
@@ -350,12 +350,12 @@ th {
   color: var(--amber);
   white-space: nowrap;
 }
- 
+
 /* ---------- FAQ / accordion ---------- */
 .accordion-item {
   border-bottom: 1px solid var(--line);
 }
- 
+
 .accordion-trigger {
   width: 100%;
   text-align: left;
@@ -372,7 +372,7 @@ th {
   align-items: center;
   gap: 12px;
 }
- 
+
 .accordion-trigger .icon {
   flex-shrink: 0;
   width: 22px; height: 22px;
@@ -383,9 +383,9 @@ th {
   transition: transform 0.2s ease;
   color: var(--teal);
 }
- 
+
 .accordion-item.open .icon { transform: rotate(45deg); }
- 
+
 .accordion-panel {
   max-height: 0;
   overflow: hidden;
@@ -393,13 +393,13 @@ th {
   color: var(--muted);
   font-size: 0.95rem;
 }
- 
+
 .accordion-item.open .accordion-panel {
   max-height: 300px;
 }
- 
+
 .accordion-panel-inner { padding: 0 2px 16px; }
- 
+
 /* ---------- Info cards (healthcare page) ---------- */
 .info-grid {
   display: grid;
@@ -407,43 +407,43 @@ th {
   gap: 18px;
   margin-bottom: 40px;
 }
- 
+
 .info-card {
   background: var(--paper-raised);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 22px;
 }
- 
+
 .info-card .tag {
   color: var(--teal);
   font-weight: 600;
   font-size: 0.78rem;
   margin-bottom: 8px;
 }
- 
+
 .info-card h3 {
   font-family: var(--font-display);
   font-size: 1.1rem;
   margin: 0 0 8px;
   font-weight: 600;
 }
- 
+
 .info-card p {
   margin: 0;
   color: var(--muted);
   font-size: 0.92rem;
 }
- 
+
 section + section { margin-top: 44px; }
- 
+
 section > h2.section-title {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0 0 18px;
 }
- 
+
 /* ---------- Footer ---------- */
 footer {
   border-top: 1px solid var(--line);
@@ -452,4 +452,66 @@ footer {
   color: var(--muted);
   font-size: 0.85rem;
 }
- 
+
+/* ============================================
+   60% additions: validation, tables, empty states
+   ============================================ */
+
+.field.has-error input,
+.field.has-error select {
+  border-color: var(--crimson);
+  background: #fff;
+}
+
+.error-text {
+  display: none;
+  color: var(--crimson);
+  font-size: 0.82rem;
+  margin-top: 5px;
+}
+
+.field.has-error .error-text { display: block; }
+
+.form-msg.error {
+  background: var(--red-soft);
+  color: var(--crimson-dark);
+  border: 1px solid #f4c3c6;
+}
+
+.table-wrap { overflow-x: auto; }
+
+.table-wrap table { min-width: 620px; }
+
+.empty-state {
+  display: none;
+  text-align: center;
+  color: var(--muted);
+  padding: 28px 10px 8px;
+  font-size: 0.95rem;
+}
+
+.empty-state.show { display: block; }
+
+.result-count {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0 0 12px;
+}
+
+.btn-link-danger {
+  background: none;
+  border: none;
+  color: var(--crimson);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 5px;
+}
+
+.btn-link-danger:hover { background: var(--red-soft); }
+
+.stack { display: flex; flex-direction: column; gap: 28px; }
+
+.stat-grid.three { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
