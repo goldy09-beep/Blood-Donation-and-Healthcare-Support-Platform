@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Profile | RaktSetu</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="profile-page">
+
+    <header class="simple-navbar">
+
+        <div class="logo">
+            🩸 Rakt<span>Setu</span>
+        </div>
+
+        <button onclick="logout()" class="logout-btn">
+            Logout
+        </button>
+
+    </header>
+
+
+    <main class="profile-container">
+
+        <div class="profile-header">
+            <div class="profile-avatar">🩸</div>
+
+            <div>
+                <p class="small-heading">DONOR PROFILE</p>
+                <h1 id="profileName">Donor</h1>
+                <p>Blood Donor</p>
+            </div>
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-box">
+                <span>Email</span>
+                <strong id="profileEmail">-</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>Role</span>
+                <strong id="profileRole">Donor</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>Phone</span>
+                <strong id="profilePhone">-</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>City</span>
+                <strong id="profileCity">-</strong>
+            </div>
+
+            <div class="profile-box blood-box">
+                <span>Blood Group</span>
+                <strong id="profileBlood">-</strong>
+            </div>
+
+            <div class="profile-box available-box">
+                <span>Availability</span>
+                <strong>Available</strong>
+            </div>
+
+        </div>
+
+
+        <a href="edit-profile.html" class="primary-btn profile-edit">
+            ✏ Edit Profile
+        </a>
+
+    </main>
+
+
+    <script src="../../js/auth.js"></script>
+
+</body>
+</html>

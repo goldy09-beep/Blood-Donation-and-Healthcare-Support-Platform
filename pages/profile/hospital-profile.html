@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hospital Profile | RaktSetu</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="profile-page">
+
+    <header class="simple-navbar">
+
+        <div class="logo">
+            🩸 Rakt<span>Setu</span>
+        </div>
+
+        <button onclick="logout()" class="logout-btn">
+            Logout
+        </button>
+
+    </header>
+
+
+    <main class="profile-container">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar hospital-avatar">
+                🏥
+            </div>
+
+            <div>
+                <p class="small-heading">HOSPITAL PROFILE</p>
+                <h1 id="profileName">Hospital</h1>
+                <p>Healthcare Partner</p>
+            </div>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-box">
+                <span>Email</span>
+                <strong id="profileEmail">-</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>Role</span>
+                <strong id="profileRole">Hospital</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>Phone</span>
+                <strong id="profilePhone">-</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>City</span>
+                <strong id="profileCity">-</strong>
+            </div>
+
+            <div class="profile-box">
+                <span>Verification</span>
+                <strong>Pending</strong>
+            </div>
+
+            <div class="profile-box available-box">
+                <span>Status</span>
+                <strong>Active</strong>
+            </div>
+
+        </div>
+
+
+        <a href="edit-profile.html" class="primary-btn profile-edit">
+            ✏ Edit Profile
+        </a>
+
+    </main>
+
+
+    <script src="../../js/auth.js"></script>
+
+</body>
+</html>
