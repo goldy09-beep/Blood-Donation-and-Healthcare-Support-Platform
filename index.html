@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
- feature/govind
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RaktSetu — Blood Donation & Healthcare Support Platform</title>
-  <meta name="description" content="Connecting blood donors with those in need. RaktSetu makes blood donation and healthcare support simple, fast and effective." />
+  <title>RaktSetu — Donor Management Module (Member 2)</title>
+  <meta name="description" content="Connecting blood donors with those in need. RaktSetu Donor Management Module makes searching, tracking, and contacting blood donors fast and reliable." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -16,14 +15,19 @@
       <a href="#" class="brand-logo" onclick="goTab('search'); return false;">
         <div class="logo-icon"></div>
         <div>Rakt<span class="highlight">Setu</span></div>
+        <span class="badge-member-tag">Member 2: Donor Management</span>
       </a>
 
       <ul class="nav-menu">
         <li><a class="nav-link active" data-nav="search" onclick="goTab('search')">Find Donors</a></li>
         <li><a class="nav-link" data-nav="myavail" onclick="goTab('myavail')">My Availability</a></li>
+        <li><a class="nav-link" onclick="openModal('screener')">🩺 Eligibility Screener</a></li>
+        <li><a class="nav-link" onclick="openModal('compat')">Compatibility Guide</a></li>
       </ul>
 
-
+      <div class="auth-actions">
+        <button class="btn-nav-solid" onclick="openModal('register')">+ Add Donor</button>
+      </div>
     </div>
   </header>
 
@@ -40,15 +44,157 @@
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         My Availability
       </button>
+      <button class="tab-btn" onclick="openModal('screener')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Health Screener
+      </button>
+      <button class="tab-btn" onclick="openModal('compat')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        Compatibility Chart
+      </button>
+    </div>
+
+    <!-- Overview Stats Bar -->
+    <div class="stats-summary-bar">
+      <div class="summary-card">
+        <div class="summary-icon">🩸</div>
+        <div class="summary-info">
+          <div class="val" id="stat-total-donors">10</div>
+          <div class="lbl">Registered Donors</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon green">⚡</div>
+        <div class="summary-info">
+          <div class="val" id="stat-avail-donors">6</div>
+          <div class="lbl">Available Now</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon amber">★</div>
+        <div class="summary-info">
+          <div class="val" id="stat-trusted-donors">7</div>
+          <div class="lbl">Highly Trusted</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon teal">📍</div>
+        <div class="summary-info">
+          <div class="val" id="stat-cities-count">5</div>
+          <div class="lbl">Cities Covered</div>
+        </div>
+      </div>
     </div>
 
     <!-- ================= VIEW 1: FIND DONORS ================= -->
     <section class="page-view active" id="view-search">
-      <div class="view-header">
-        <h2>Find Available Donors</h2>
-        <p>Search by blood group and city to find available donors in your area. Results are sorted by reliability score.</p>
+
+      <!-- 1. Real-time Emergency SOS Alert Banner -->
+      <div class="emergency-sos-banner">
+        <div>
+          <div class="sos-badge-pill">
+            <span class="sos-pulse-dot"></span>
+            Critical Emergency Request
+          </div>
+          <div style="font-size:16px; font-weight:800; margin-bottom:2px;">
+            🚨 Urgent: 2 Units of O- Blood Required Immediately at KEM Hospital Mumbai
+          </div>
+          <div style="font-size:12.5px; opacity:0.9;">
+            Patient in critical surgery · 3 compatible donors detected within 5 km.
+          </div>
+        </div>
+        <div class="sos-actions">
+          <button class="btn-sos-respond" onclick="respondToEmergencyAlert()">⚡ I Can Donate</button>
+          <button class="btn-sos-broadcast" onclick="broadcastEmergencyAlert()">📢 Broadcast SOS</button>
+        </div>
       </div>
 
+      <div class="view-header">
+        <h2>Find Available Blood Donors</h2>
+        <p>Search by blood group and city to find verified donors in your area. Results are ranked by real-time reliability score and proximity distance.</p>
+      </div>
+
+      <!-- 2. Advanced Feature Toolbar -->
+      <div class="donor-feature-toolbar">
+        <div class="toolbar-left">
+          <button id="btn-toggle-radar" class="toolbar-toggle-btn" onclick="toggleRadarScanner()">
+            📡 Proximity Radar
+          </button>
+          <button id="btn-toggle-compat" class="toolbar-toggle-btn" onclick="toggleSmartCrossMatching()">
+            🧠 Smart Cross-Matching
+          </button>
+          <button class="toolbar-toggle-btn" onclick="openModal('screener')">
+            🩺 60s Health Screener
+          </button>
+        </div>
+        <div class="toolbar-right">
+          <button class="toolbar-toggle-btn" onclick="exportDonorsCSV()">
+            📥 Export CSV
+          </button>
+          <button class="toolbar-toggle-btn" onclick="window.print()">
+            🖨️ Print Roster
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Proximity Radar Visual View -->
+      <div class="radar-scanner-card" id="radar-scanner-card">
+        <div class="radar-head">
+          <div class="radar-title">
+            <span style="color:#10B981;">📡</span>
+            Live Proximity Radar (Local Vicinity Scanner)
+          </div>
+          <div style="font-size:13px; color:#94A3B8;">
+            Center Hub: <b>Hospital / Patient Location</b> · Showing live GPS-simulated donors
+          </div>
+        </div>
+
+        <div class="radar-viewport">
+          <div class="radar-ring r1"></div>
+          <div class="radar-ring r2"></div>
+          <div class="radar-ring r3"></div>
+          <div class="radar-ring r4"></div>
+          <div class="radar-crosshair-v"></div>
+          <div class="radar-crosshair-h"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-center-hub" title="You / Hospital Location"></div>
+          <div id="radar-blips-container"></div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:12px; color:#94A3B8;">
+          <div style="display:flex; gap:16px;">
+            <span><span style="color:#10B981;">●</span> Available Now</span>
+            <span><span style="color:#64748B;">●</span> Offline / Unavailable</span>
+            <span><span style="color:#38BDF8;">●</span> Center: Hospital</span>
+          </div>
+          <div>Click any dot on the radar to view donor details</div>
+        </div>
+      </div>
+
+      <!-- Quick Blood Group Chips -->
+      <div class="chip-container" style="margin-bottom: 16px;">
+        <span class="chip-label">Quick Blood Group:</span>
+        <button class="blood-chip active" data-bg="" onclick="selectBloodChip(this, '')">All</button>
+        <button class="blood-chip" data-bg="O+" onclick="selectBloodChip(this, 'O+')">O+</button>
+        <button class="blood-chip" data-bg="O-" onclick="selectBloodChip(this, 'O-')">O-</button>
+        <button class="blood-chip" data-bg="A+" onclick="selectBloodChip(this, 'A+')">A+</button>
+        <button class="blood-chip" data-bg="A-" onclick="selectBloodChip(this, 'A-')">A-</button>
+        <button class="blood-chip" data-bg="B+" onclick="selectBloodChip(this, 'B+')">B+</button>
+        <button class="blood-chip" data-bg="B-" onclick="selectBloodChip(this, 'B-')">B-</button>
+        <button class="blood-chip" data-bg="AB+" onclick="selectBloodChip(this, 'AB+')">AB+</button>
+        <button class="blood-chip" data-bg="AB-" onclick="selectBloodChip(this, 'AB-')">AB-</button>
+      </div>
+
+      <!-- Distance Radius Filter Bar -->
+      <div class="chip-container" style="margin-bottom: 20px;">
+        <span class="chip-label">Distance Radius:</span>
+        <button class="blood-chip btn-dist-filter" data-km="5" onclick="setDistanceRadius(5)">Within 5 km</button>
+        <button class="blood-chip btn-dist-filter" data-km="10" onclick="setDistanceRadius(10)">Within 10 km</button>
+        <button class="blood-chip btn-dist-filter" data-km="25" onclick="setDistanceRadius(25)">Within 25 km</button>
+        <button class="blood-chip btn-dist-filter active" data-km="50" onclick="setDistanceRadius(50)">Any Distance</button>
+      </div>
+
+      <!-- Filters Card -->
       <div class="filters-card">
         <div class="filters-grid">
           <div class="filter-group">
@@ -61,49 +207,60 @@
           </div>
 
           <div class="filter-group">
-            <label>City</label>
-            <input type="text" id="f-city" class="form-control" placeholder="e.g., Mumbai, Delhi" oninput="runSearch()" />
+            <label>City or Area</label>
+            <input type="text" id="f-city" class="form-control" placeholder="e.g. Mumbai, Delhi, Pune..." oninput="runSearch()" />
           </div>
 
           <div class="filter-group">
-            <label>Availability</label>
+            <label>Availability Status</label>
             <select id="f-avail" class="form-control" onchange="runSearch()">
-              <option value="all">All donors</option>
-              <option value="available">Available now</option>
-              <option value="unavailable">Not available</option>
+              <option value="all">All Donors</option>
+              <option value="available" selected>Available Now Only</option>
+              <option value="unavailable">Not Available</option>
             </select>
           </div>
 
-          <div class="filter-group" style="display:flex; align-items:flex-end;">
-            <button class="btn-filter-search" onclick="runSearch()">Search Donors</button>
+          <div class="filter-group">
+            <label>Sort By</label>
+            <select id="f-sort" class="form-control" onchange="runSearch()">
+              <option value="score">Highest Reliability Score</option>
+              <option value="distance">Nearest Distance (km)</option>
+              <option value="accept">Highest Acceptance Rate</option>
+              <option value="matches">Most Donations</option>
+              <option value="name">Donor Name (A-Z)</option>
+            </select>
           </div>
         </div>
       </div>
 
       <div class="results-head">
         <div class="results-count" id="results-count">10 donors found</div>
-        <div class="results-sort">Sorted by reliability score</div>
+        <div class="results-sort">Live real-time sorting · Proximity active</div>
       </div>
 
       <div class="donor-grid" id="donor-grid"></div>
       
       <div class="empty-state" id="empty-state" style="display:none;">
         <h3>No matching donors found</h3>
-        <p>Try adjusting your blood group or city filters.</p>
+        <p>Try enabling <b>Smart Cross-Matching</b> or expanding your distance radius.</p>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:14px;">
+          <button class="btn-filter-search" style="width:auto;" onclick="toggleSmartCrossMatching()">🧠 Enable Cross-Matching</button>
+          <button class="btn-filter-search" style="width:auto; background:#475569;" onclick="setDistanceRadius(50)">Reset Distance</button>
+        </div>
       </div>
     </section>
 
-    <!-- ================= VIEW 3: MY AVAILABILITY ================= -->
+    <!-- ================= VIEW 2: MY AVAILABILITY ================= -->
     <section class="page-view" id="view-myavail">
       <div class="view-header">
-        <h2>My Donation Availability</h2>
-        <p>Manage when you're available to donate. Hospitals and patients only see you while your window is active.</p>
+        <h2>My Donation Availability Window</h2>
+        <p>Manage when you are on-call to donate blood. Hospitals and patients only see you in the active search list while your window is open.</p>
       </div>
 
       <div class="avail-layout">
-        <!-- Toggle card -->
+        <!-- Toggle Card -->
         <div class="card-box">
-          <h3>Donation Availability</h3>
+          <h3>Set Availability Window</h3>
 
           <div class="status-box" id="status-box">
             <div class="status-label">Current Status</div>
@@ -111,305 +268,281 @@
               <span class="status-dot" id="status-dot"></span>
               <span id="status-text">Not Available</span>
             </div>
-            <div class="status-sub" id="status-sub">Currently inactive</div>
+            <div class="status-sub" id="status-sub">Currently inactive · Not appearing in emergency search</div>
+          </div>
+
+          <div class="timer-box" id="timer-box" style="display:none;">
+            <div>
+              <div style="font-size:12px; font-weight:700; color:#92400E;">Active Window Remaining</div>
+              <div style="font-size:12px; color:#B45309;">Auto-expires for fresh listings</div>
+            </div>
+            <div class="timer-digits" id="timer-digits">05:59:45</div>
           </div>
 
           <div class="toast-banner" id="toast-banner"></div>
 
           <div class="form-group">
-            <label>Make me available for:</label>
+            <label>Choose duration to be on-call:</label>
             <div class="toggle-row">
               <select id="duration-select" class="form-control">
                 <option value="1">1 hour</option>
                 <option value="2">2 hours</option>
                 <option value="4">4 hours</option>
-                <option value="6" selected>6 hours</option>
+                <option value="6" selected>6 hours (Recommended)</option>
                 <option value="12">12 hours</option>
                 <option value="24">24 hours</option>
               </select>
-              <button class="btn-filter-search" style="width:auto; padding:10px 20px;" onclick="setAvailability()">Set</button>
+              <button class="btn-filter-search" style="width:auto; padding:10px 22px;" onclick="setAvailability()">Go Live</button>
             </div>
           </div>
 
           <button class="btn-secondary-outline" style="margin-bottom:18px;" onclick="expireAvailability()">Turn Off Availability Now</button>
 
           <div class="info-tip">
-            💡 <b>Tip:</b> Your availability automatically expires after the duration you set — the list always reflects "now", not "ever".
+            💡 <b>Why dynamic availability matters:</b> In emergencies, contacting inactive donors wastes crucial minutes. RaktSetu automatically de-lists donors when their active window ends.
           </div>
         </div>
 
-        <!-- Right Column -->
+        <!-- Right Column: Profile & Eligibility -->
         <div class="stack-vertical">
           <div class="card-box">
-            <h3>Your Profile</h3>
-            <div class="row-line"><span class="k">Name</span><span class="v">Rajesh Kumar</span></div>
-            <div class="row-line"><span class="k">Blood Group</span><span class="v mono" style="color:var(--primary-red);">O+</span></div>
-            <div class="row-line"><span class="k">City</span><span class="v">Mumbai</span></div>
-            <div class="row-line"><span class="k">Phone</span><span class="v">+91-9876543210</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <h3 style="margin:0;">My Profile Summary</h3>
+              <span class="badge-pill badge-trusted">◑ Trusted Donor</span>
+            </div>
+            <div class="row-line"><span class="k">Donor Name</span><span class="v">Govind Sharma</span></div>
+            <div class="row-line"><span class="k">Blood Group</span><span class="v mono" style="color:var(--primary-red); font-size:16px;">O+</span></div>
+            <div class="row-line"><span class="k">Registered City</span><span class="v">Mumbai</span></div>
+            <div class="row-line"><span class="k">Emergency Contact</span><span class="v">+91-9876543210</span></div>
           </div>
 
           <div class="card-box">
-            <h3>Donation History</h3>
-            <div class="status-label">Reliability Score</div>
+            <h3>Reliability Performance Score</h3>
+            <div class="status-label">Algorithm Score</div>
             <div style="display:flex; align-items:flex-end; gap:6px; margin:4px 0 6px;">
-              <span style="font-size:32px; font-weight:800; color:var(--primary-red);">62</span>
-              <span style="font-size:13px; color:var(--text-muted); margin-bottom:4px;">/ 100</span>
+              <span style="font-size:36px; font-weight:800; color:var(--primary-red);">78</span>
+              <span style="font-size:14px; color:var(--text-muted); margin-bottom:4px;">/ 100</span>
             </div>
-            <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Based on response history to donation requests</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Calculated based on response rate, verified donations, and user feedback</div>
 
             <div class="stat-triple">
-              <div><div class="num">8</div><div class="lbl">Total Matches</div></div>
-              <div class="stat-accept"><div class="num">5</div><div class="lbl">Accepted</div></div>
-              <div><div class="num">2</div><div class="lbl">Declined</div></div>
+              <div><div class="num">12</div><div class="lbl">Total Requests</div></div>
+              <div class="stat-accept"><div class="num">10</div><div class="lbl">Accepted</div></div>
+              <div><div class="num">1</div><div class="lbl">Declined</div></div>
             </div>
 
             <div style="padding-top:14px; border-top:1px solid var(--border-color); margin-top:14px;">
-              <div style="font-size:13px; color:var(--text-muted); margin-bottom:4px;">Acceptance Rate</div>
-              <div class="progress-track"><div class="progress-fill" style="width:63%;"></div></div>
-              <div style="font-size:14px; font-weight:700;">63%</div>
+              <div style="font-size:13px; color:var(--text-muted); margin-bottom:4px;">Acceptance Rate (83%)</div>
+              <div class="progress-track"><div class="progress-fill" style="width:83%;"></div></div>
             </div>
           </div>
 
           <div class="card-box">
-            <h3>Donation Eligibility</h3>
+            <h3>Medical Eligibility Status</h3>
             <div style="background:var(--success-soft); border:1px solid #BFE6CB; border-radius:8px; padding:12px 14px;">
-              <div style="font-weight:700; color:var(--success-green);">✓ Eligible to donate</div>
-              <div style="font-size:13px; color:#1E8449; margin-top:2px;">It's been more than 90 days since your last donation.</div>
+              <div style="font-weight:700; color:var(--success-green);">✓ Eligible to Donate</div>
+              <div style="font-size:13px; color:#1E8449; margin-top:2px;">Last donated 98 days ago (Required cooldown: 90 days). Weight: 68 kg.</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= VIEW 4: DONOR DETAIL ================= -->
+    <!-- ================= VIEW 3: DONOR DETAIL VIEW ================= -->
     <section class="page-view" id="view-detail">
       <!-- Dynamic populated via script.js -->
     </section>
 
     <!-- ================= FOOTER ================= -->
     <footer class="site-footer">
-      <p>© 2026 RaktSetu Healthcare Support Platform · Modern Modular Edition</p>
+      <p>© 2026 RaktSetu Healthcare Support Platform · Member 2 (Govind) Donor Management Module</p>
     </footer>
 
   </main>
 
+  <!-- ================= MODAL 1: REGISTER NEW DONOR ================= -->
+  <div class="modal-overlay" id="modal-register">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('register')">✕</button>
+      <div class="modal-title">🩸 Register New Donor</div>
+      <div class="modal-sub">Add a verified donor to the RaktSetu network.</div>
+
+      <form id="form-register-donor" onsubmit="handleRegisterDonor(event)">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="reg-name" class="form-control" placeholder="e.g. Rahul Mehta" required />
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>Blood Group *</label>
+            <select id="reg-bg" class="form-control" required>
+              <option value="O+">O+</option><option value="O-">O-</option>
+              <option value="A+">A+</option><option value="A-">A-</option>
+              <option value="B+">B+</option><option value="B-">B-</option>
+              <option value="AB+">AB+</option><option value="AB-">AB-</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>City *</label>
+            <input type="text" id="reg-city" class="form-control" placeholder="e.g. Mumbai" required />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>Age (Years) *</label>
+            <input type="number" id="reg-age" class="form-control" placeholder="18 - 65" min="18" max="65" value="25" required />
+          </div>
+          <div class="form-group">
+            <label>Weight (kg) *</label>
+            <input type="number" id="reg-weight" class="form-control" placeholder="Min 50kg" min="50" max="150" value="62" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Contact Phone (10 digits) *</label>
+          <input type="tel" id="reg-phone" class="form-control" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required />
+        </div>
+
+        <div class="form-group">
+          <label>Availability on Registration</label>
+          <select id="reg-avail" class="form-control">
+            <option value="true" selected>Available Now (6h window)</option>
+            <option value="false">Not Available Currently</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-full-primary">+ Save & Register Donor</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 2: CONTACT / EMERGENCY SOS ================= -->
+  <div class="modal-overlay" id="modal-contact">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('contact')">✕</button>
+      <div class="modal-title">📞 Contact Blood Donor</div>
+      <div class="modal-sub" id="contact-donor-sub">Reach out directly for blood donation.</div>
+
+      <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:18px;">
+        <div style="font-size:18px; font-weight:800;" id="contact-donor-name">Donor Name</div>
+        <div style="display:flex; gap:10px; align-items:center; margin-top:4px;">
+          <span class="bg-badge mono" id="contact-donor-bg">O+</span>
+          <span style="font-size:13px; color:var(--text-muted);" id="contact-donor-city">📍 Mumbai</span>
+        </div>
+      </div>
+
+      <a id="btn-action-call" href="#" class="contact-option-btn contact-call">
+        <div class="contact-option-icon">📞</div>
+        <div>
+          <div>Direct Voice Call</div>
+          <div style="font-size:12px; color:var(--text-muted); font-weight:normal;" id="contact-phone-text">+91-9876543210</div>
+        </div>
+      </a>
+
+      <a id="btn-action-wa" href="#" target="_blank" class="contact-option-btn contact-wa">
+        <div class="contact-option-icon">💬</div>
+        <div>
+          <div>WhatsApp Message</div>
+          <div style="font-size:12px; color:var(--text-muted); font-weight:normal;">Send pre-filled emergency blood request</div>
+        </div>
+      </a>
+
+      <button type="button" class="contact-option-btn contact-sos" onclick="triggerSosPing()">
+        <div class="contact-option-icon">🚨</div>
+        <div>
+          <div>Send Immediate SOS Alert</div>
+          <div style="font-size:12px; color:var(--text-muted); font-weight:normal;">Broadcast urgent SMS notification to donor</div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 3: COMPATIBILITY GUIDE ================= -->
+  <div class="modal-overlay" id="modal-compat">
+    <div class="modal-card" style="max-width: 540px;">
+      <button class="modal-close" onclick="closeModal('compat')">✕</button>
+      <div class="modal-title">🩸 Blood Group Compatibility</div>
+      <div class="modal-sub">Reference guide for recipient and donor compatibility.</div>
+
+      <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:left;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border-color); color:var(--text-muted);">
+            <th style="padding:8px;">Recipient</th>
+            <th style="padding:8px;">Can Receive From</th>
+            <th style="padding:8px;">Can Donate To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">O-</td><td style="padding:8px;">O- only</td><td style="padding:8px; font-weight:700;">Everyone (Universal)</td></tr>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">O+</td><td style="padding:8px;">O+, O-</td><td style="padding:8px;">O+, A+, B+, AB+</td></tr>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">A-</td><td style="padding:8px;">A-, O-</td><td style="padding:8px;">A-, A+, AB-, AB+</td></tr>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">A+</td><td style="padding:8px;">A+, A-, O+, O-</td><td style="padding:8px;">A+, AB+</td></tr>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">B-</td><td style="padding:8px;">B-, O-</td><td style="padding:8px;">B-, B+, AB-, AB+</td></tr>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">B+</td><td style="padding:8px;">B+, B-, O+, O-</td><td style="padding:8px;">B+, AB+</td></tr>
+          <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px; font-weight:800; color:var(--primary-red);">AB-</td><td style="padding:8px;">AB-, A-, B-, O-</td><td style="padding:8px;">AB-, AB+</td></tr>
+          <tr><td style="padding:8px; font-weight:800; color:var(--primary-red);">AB+</td><td style="padding:8px; font-weight:700;">Everyone (Universal)</td><td style="padding:8px;">AB+ only</td></tr>
+        </tbody>
+      </table>
+
+      <button class="btn-full-primary" style="margin-top:20px;" onclick="closeModal('compat')">Close Guide</button>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 4: OFFICIAL CERTIFICATE ================= -->
+  <div class="modal-overlay" id="modal-certificate">
+    <div class="modal-card" style="max-width: 620px; padding:0; background:transparent; box-shadow:none;">
+      <div class="certificate-frame">
+        <button class="modal-close" style="top:12px; right:12px;" onclick="closeModal('certificate')">✕</button>
+        <div class="cert-header">National Blood Transfusion Network · Verified Donor Recognition</div>
+        <div class="cert-main-title">Certificate of Appreciation</div>
+        <p style="font-size:13px; color:#4B5563; margin-bottom:8px;">This certificate of life-saving honor is proudly presented to</p>
+
+        <div class="cert-recipient" id="cert-donor-name">Rajesh Kumar</div>
+
+        <p style="font-size:13.5px; color:#374151; max-width:440px; margin:0 auto 12px; line-height:1.6;">
+          In grateful recognition of your voluntary contribution as a certified blood donor (<span class="mono" style="font-weight:800; color:#B91C1C;" id="cert-donor-bg">O+</span>), having contributed:
+        </p>
+
+        <div style="font-size:16px; font-weight:800; color:#B45309;" id="cert-units-count">
+          8 Life-Saving Blood Units Donated
+        </div>
+
+        <div class="cert-gold-seal">★</div>
+
+        <div class="cert-footer-row">
+          <div style="text-align:left;">
+            <div style="font-size:11px; font-weight:700; color:#6B7280;" id="cert-id-text">ID: RS-2026-9041</div>
+            <div style="font-size:11px; color:#9CA3AF;" id="cert-issue-date">October 28, 2026</div>
+          </div>
+          <div>
+            <div style="font-family:serif; font-size:16px; font-weight:800; color:#1F2937;">Dr. A. K. Sen</div>
+            <div style="font-size:11px; color:#6B7280; border-top:1px solid #9CA3AF; padding-top:2px;">Medical Director, RaktSetu</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
+          <button class="btn-filter-search" style="width:auto; padding:8px 20px;" onclick="printCertificate()">🖨️ Print Certificate</button>
+          <button class="btn-secondary-outline" style="width:auto; padding:8px 20px;" onclick="closeModal('certificate')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 5: 60-SEC MEDICAL ELIGIBILITY SCREENER ================= -->
+  <div class="modal-overlay" id="modal-screener">
+    <div class="modal-card" style="max-width: 480px; padding: 24px 28px;">
+      <button class="modal-close" onclick="closeModal('screener')">✕</button>
+      <div class="modal-title">🩺 Medical Eligibility Screener</div>
+      <div class="modal-sub" style="margin-bottom:14px;">Instant 60-second donor health verification.</div>
+
+      <div id="screener-wizard-body">
+        <!-- Rendered dynamically via initScreenerWizard() in script.js -->
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RaktSetu | Blood Donation Platform</title>
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-    <!-- Navbar -->
-    <header class="navbar">
-
-        <div class="logo">
-            <span>🩸</span>
-            Rakt<span>Setu</span>
-        </div>
-
-        <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="#">About</a>
-            <a href="#">Donor</a>
-            <a href="#">Hospital</a>
-            <a href="#">Emergency</a>
-            <a href="#">Contact</a>
-        </nav>
-
-        <div class="nav-buttons">
-            <a href="pages/auth/login.html" class="login-btn">Login</a>
-            <a href="pages/auth/role-selection.html" class="signup-btn">Sign Up</a>
-        </div>
-
-    </header>
-
-
-    <!-- Hero Section -->
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <p class="small-heading">
-                BE A HERO &nbsp; • &nbsp; DONATE BLOOD
-            </p>
-
-            <h1>
-                Connecting <span>Blood Donors</span>
-                <br>
-                with Those in Need
-            </h1>
-
-            <p class="hero-text">
-                RaktSetu makes blood donation and healthcare
-                support simple, fast and effective.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="pages/auth/role-selection.html" class="primary-btn">
-                    🩸 &nbsp; Donate Blood →
-                </a>
-
-                <a href="#" class="secondary-btn">
-                    🔍 &nbsp; Find Donors
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- Blood Illustration -->
-        <div class="hero-image">
-
-            <div class="blood-bag">
-                <div class="blood-bag-top"></div>
-
-                <div class="bag-label">
-                    🩸
-                    <br>
-                    <small>Save Lives</small>
-                    <br>
-                    <small>Donate Blood</small>
-                </div>
-
-                <div class="blood"></div>
-            </div>
-
-            <div class="heart-line">♡</div>
-
-            <div class="drop-text">
-                Every<br>
-                Drop<br>
-                Counts
-                <span>♡</span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Feature Cards -->
-    <section class="features">
-
-        <div class="feature-card">
-            <div class="feature-icon">🩸</div>
-
-            <div>
-                <h3>Save Lives</h3>
-                <p>Your donation matters</p>
-            </div>
-
-            <span class="arrow">→</span>
-        </div>
-
-
-        <div class="feature-card">
-            <div class="feature-icon">👤</div>
-
-            <div>
-                <h3>Find Donors</h3>
-                <p>Quick & easy search</p>
-            </div>
-
-            <span class="arrow">→</span>
-        </div>
-
-
-        <div class="feature-card">
-            <div class="feature-icon">🏥</div>
-
-            <div>
-                <h3>Hospital Support</h3>
-                <p>Real-time blood stock</p>
-            </div>
-
-            <span class="arrow">→</span>
-        </div>
-
-
-        <div class="feature-card">
-            <div class="feature-icon">👥</div>
-
-            <div>
-                <h3>Build Community</h3>
-                <p>Together we can</p>
-            </div>
-
-            <span class="arrow">→</span>
-        </div>
-
-    </section>
-
-
-    <!-- Impact Section -->
-    <section class="impact">
-
-        <div class="impact-text">
-
-            <p class="small-heading">OUR IMPACT</p>
-
-            <h2>
-                A small step from you
-                can make a <span>big difference.</span>
-            </h2>
-
-            <p>
-                Every blood donation saves lives.
-                Together we can build a healthier
-                and stronger community.
-            </p>
-
-        </div>
-
-
-        <div class="stats">
-
-            <div class="stat">
-                <div>👥</div>
-                <h3>5,240+</h3>
-                <p>Total Donors</p>
-            </div>
-
-            <div class="stat">
-                <div>🏥</div>
-                <h3>120+</h3>
-                <p>Partner Hospitals</p>
-            </div>
-
-            <div class="stat">
-                <div>❤️</div>
-                <h3>8,900+</h3>
-                <p>Lives Helped</p>
-            </div>
-
-            <div class="stat">
-                <div>🩸</div>
-                <h3>24/7</h3>
-                <p>Emergency Support</p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <footer>
-        <p>© 2026 RaktSetu | Every Drop Counts ❤️</p>
-    </footer>
-
-</body>
-</html>
-dev
