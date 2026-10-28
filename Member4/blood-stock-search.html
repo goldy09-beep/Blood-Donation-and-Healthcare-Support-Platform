@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Stock Search — RaktSetu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <nav class="mainnav">
+      <a href="hospital-inventory.html">Inventory</a>
+      <a href="blood-stock-search.html">Stock Search</a>
+      <a href="healthcare-info.html">Healthcare Info</a>
+      <a href="volunteer-dashboard.html">Volunteers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <p class="kicker">Blood Stock Search</p>
+  <h1>Find blood stock near you</h1>
+  <p>Search hospitals by city and blood group. Results come from the stock saved in the Inventory page and update as you type.</p>
+</div>
+
+<main>
+  <div class="card" style="margin-bottom: 28px;">
+    <h2>Search</h2>
+    <p class="sub">Leave a field empty to see all results.</p>
+
+    <form id="searchForm" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="e.g. Mathura" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="searchGroup">Blood group</label>
+          <select id="searchGroup" name="searchGroup">
+            <option value="">Any</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>O+</option>
+            <option>O-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Search stock</button>
+      <button type="button" class="btn btn-outline" id="resetSearch">Reset</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Results</h2>
+    <p class="result-count" id="resultCount"></p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Hospital</th>
+            <th>City</th>
+            <th>Blood group</th>
+            <th>Available</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <div class="empty-state" id="resultsEmpty">No hospitals match this search. Try a different city or blood group.</div>
+  </div>
+</main>
+
+<footer>RaktSetu — Hospital &amp; Healthcare module · Member 4</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Inventory — RaktSetu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <nav class="mainnav">
+      <a href="hospital-inventory.html">Inventory</a>
+      <a href="blood-stock-search.html">Stock Search</a>
+      <a href="healthcare-info.html">Healthcare Info</a>
+      <a href="volunteer-dashboard.html">Volunteers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <p class="kicker">Hospital Inventory</p>
+  <h1>Track and update your blood stock</h1>
+  <p>Add stock for each blood group. Saving the same hospital and blood group again updates the units.</p>
+</div>
+
+<main>
+
+  <div class="stat-grid three">
+    <div class="stat-card">
+      <div class="num" id="sumUnits">0</div>
+      <div class="label">Total units in stock</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="sumCritical">0</div>
+      <div class="label">Critical entries (5 units or less)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="sumHospitals">0</div>
+      <div class="label">Hospitals listed</div>
+    </div>
+  </div>
+
+  <div class="grid-two">
+
+    <div class="card">
+      <h2>Add / update stock</h2>
+      <p class="sub">All fields are required.</p>
+
+      <form id="stockForm" novalidate>
+        <div class="field">
+          <label for="hospitalName">Hospital name</label>
+          <input type="text" id="hospitalName" name="hospitalName" placeholder="e.g. City Care Hospital">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="e.g. Mathura">
+          </div>
+          <div class="field">
+            <label for="contact">Contact number</label>
+            <input type="tel" id="contact" name="contact" placeholder="10-digit mobile" maxlength="10">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bloodGroup">Blood group</label>
+            <select id="bloodGroup" name="bloodGroup">
+              <option value="">Select</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>O+</option>
+              <option>O-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="units">Units (in bags)</label>
+            <input type="number" id="units" name="units" min="0" max="500" placeholder="0">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="lastUpdated">Last updated</label>
+          <input type="date" id="lastUpdated" name="lastUpdated">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save stock entry</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Current stock</h2>
+      <p class="sub">Saved in your browser. Status: 5 or less is Critical, 6–20 Moderate, above 20 Healthy.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Hospital</th>
+              <th>Group</th>
+              <th>Units</th>
+              <th>Status</th>
+              <th>Updated</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="invBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="invEmpty">No stock entries yet. Add one using the form.</div>
+    </div>
+
+  </div>
+</main>
+
+<footer>RaktSetu — Hospital &amp; Healthcare module · Member 4</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
