@@ -23,26 +23,53 @@
 <div class="page-head">
   <p class="kicker">Hospital Inventory</p>
   <h1>Track and update your blood stock</h1>
-  <p>See how many units of each blood group your hospital currently holds, and log new stock as it comes in.</p>
+  <p>Add stock for each blood group. Saving the same hospital and blood group again updates the units.</p>
 </div>
 
 <main>
+
+  <div class="stat-grid three">
+    <div class="stat-card">
+      <div class="num" id="sumUnits">0</div>
+      <div class="label">Total units in stock</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="sumCritical">0</div>
+      <div class="label">Critical entries (5 units or less)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="sumHospitals">0</div>
+      <div class="label">Hospitals listed</div>
+    </div>
+  </div>
+
   <div class="grid-two">
 
     <div class="card">
       <h2>Add / update stock</h2>
-      <p class="sub">Enter a blood group and the number of units to record it.</p>
+      <p class="sub">All fields are required.</p>
 
-      <form id="stockForm" class="js-basic-form" data-success="Stock entry recorded.">
+      <form id="stockForm" novalidate>
         <div class="field">
           <label for="hospitalName">Hospital name</label>
-          <input type="text" id="hospitalName" name="hospitalName" placeholder="e.g. City Care Hospital" required>
+          <input type="text" id="hospitalName" name="hospitalName" placeholder="e.g. City Care Hospital">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="e.g. Mathura">
+          </div>
+          <div class="field">
+            <label for="contact">Contact number</label>
+            <input type="tel" id="contact" name="contact" placeholder="10-digit mobile" maxlength="10">
+          </div>
         </div>
 
         <div class="field-row">
           <div class="field">
             <label for="bloodGroup">Blood group</label>
-            <select id="bloodGroup" name="bloodGroup" required>
+            <select id="bloodGroup" name="bloodGroup">
               <option value="">Select</option>
               <option>A+</option>
               <option>A-</option>
@@ -56,7 +83,7 @@
           </div>
           <div class="field">
             <label for="units">Units (in bags)</label>
-            <input type="number" id="units" name="units" min="0" placeholder="0" required>
+            <input type="number" id="units" name="units" min="0" max="500" placeholder="0">
           </div>
         </div>
 
@@ -72,50 +99,24 @@
 
     <div class="card">
       <h2>Current stock</h2>
-      <p class="sub">Sample data — will load from saved entries once storage is connected.</p>
+      <p class="sub">Saved in your browser. Status: 5 or less is Critical, 6–20 Moderate, above 20 Healthy.</p>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Blood group</th>
-            <th>Units</th>
-            <th>Status</th>
-            <th>Updated</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>O+</td>
-            <td>42</td>
-            <td><span class="stock-pill"><span class="stock-dot high"></span>Healthy</span></td>
-            <td>18 Sep</td>
-          </tr>
-          <tr>
-            <td>A+</td>
-            <td>27</td>
-            <td><span class="stock-pill"><span class="stock-dot high"></span>Healthy</span></td>
-            <td>17 Sep</td>
-          </tr>
-          <tr>
-            <td>B-</td>
-            <td>9</td>
-            <td><span class="stock-pill"><span class="stock-dot mid"></span>Moderate</span></td>
-            <td>15 Sep</td>
-          </tr>
-          <tr>
-            <td>AB-</td>
-            <td>2</td>
-            <td><span class="stock-pill"><span class="stock-dot low"></span>Critical</span></td>
-            <td>12 Sep</td>
-          </tr>
-          <tr>
-            <td>O-</td>
-            <td>5</td>
-            <td><span class="stock-pill"><span class="stock-dot low"></span>Critical</span></td>
-            <td>10 Sep</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Hospital</th>
+              <th>Group</th>
+              <th>Units</th>
+              <th>Status</th>
+              <th>Updated</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="invBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="invEmpty">No stock entries yet. Add one using the form.</div>
     </div>
 
   </div>
