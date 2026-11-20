@@ -1,484 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RaktSetu | Blood Requests</title>
-
-    <link rel="stylesheet" href="requests.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RaktSetu blood donation and emergency request prototype">
+  <title>RaktSetu | Blood Requests</title>
+  <link rel="stylesheet" href="requests.css">
+  <script src="requests.js" defer></script>
 </head>
-
 <body>
-
-    <!-- ================= NAVBAR ================= -->
-
-    <header class="navbar">
-
-        <div class="logo-area">
-            <div class="logo-drop">♥</div>
-            <span class="logo-text">
-                Rakt<span>Setu</span>
-            </span>
-        </div>
-
-        <nav>
-            <a href="#" class="active">Requests</a>
-            <a href="#">Find Donors</a>
-            <a href="#">Hospital</a>
-            <a href="#">Emergency</a>
-            <a href="#">Contact</a>
-        </nav>
-
-        <div class="nav-actions">
-            <span class="user-name">Goldy</span>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
-
-    </header>
-
-
-    <!-- ================= PAGE ================= -->
-
-    <main class="page-container">
-
-        <!-- PAGE HEADER -->
-
-        <section class="page-heading">
-
-            <div>
-                <p class="small-heading">EMERGENCY BLOOD SUPPORT</p>
-
-                <h1>
-                    Blood <span>Requests</span>
-                </h1>
-
-                <p class="heading-text">
-                    Raise a request, find compatible donors and track
-                    your request until it is fulfilled.
-                </p>
-            </div>
-
-            <button class="primary-btn" onclick="openRequestForm()">
-                + Create Request
-            </button>
-
-        </section>
-
-
-        <!-- ================= QUICK STATS ================= -->
-
-        <section class="stats-grid">
-
-            <div class="stat-card">
-                <div class="stat-icon">🩸</div>
-
-                <div>
-                    <p>My Requests</p>
-                    <h2 id="totalRequests">0</h2>
-                </div>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-icon">⏳</div>
-
-                <div>
-                    <p>Open Requests</p>
-                    <h2 id="openRequests">0</h2>
-                </div>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-icon">✓</div>
-
-                <div>
-                    <p>Matched</p>
-                    <h2 id="matchedRequests">0</h2>
-                </div>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-icon">♥</div>
-
-                <div>
-                    <p>Lives Supported</p>
-                    <h2 id="fulfilledRequests">0</h2>
-                </div>
-            </div>
-
-        </section>
-
-
-        <!-- ================= REQUEST FORM ================= -->
-
-        <section id="requestSection" class="content-card">
-
-            <div class="section-header">
-
-                <div>
-                    <p class="small-heading">NEW REQUEST</p>
-                    <h2>Create Blood Request</h2>
-                </div>
-
-                <button class="close-btn" onclick="closeRequestForm()">
-                    ×
-                </button>
-
-            </div>
-
-
-            <form id="requestForm">
-
-                <div class="form-grid">
-
-                    <!-- BLOOD GROUP -->
-
-                    <div class="form-group">
-
-                        <label for="bloodGroup">
-                            Blood Group
-                        </label>
-
-                        <select id="bloodGroup" required>
-
-                            <option value="">
-                                Select blood group
-                            </option>
-
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- UNITS -->
-
-                    <div class="form-group">
-
-                        <label for="units">
-                            Units Needed
-                        </label>
-
-                        <input
-                            type="number"
-                            id="units"
-                            min="1"
-                            max="20"
-                            placeholder="Example: 2"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- CITY -->
-
-                    <div class="form-group">
-
-                        <label for="city">
-                            City
-                        </label>
-
-                        <input
-                            type="text"
-                            id="city"
-                            placeholder="Example: Mathura"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- HOSPITAL -->
-
-                    <div class="form-group">
-
-                        <label for="hospital">
-                            Hospital
-                        </label>
-
-                        <input
-                            type="text"
-                            id="hospital"
-                            placeholder="Hospital name"
-                        >
-
-                    </div>
-
-
-                    <!-- DATE -->
-
-                    <div class="form-group">
-
-                        <label for="neededBy">
-                            Required By
-                        </label>
-
-                        <input
-                            type="datetime-local"
-                            id="neededBy"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- URGENCY -->
-
-                <div class="urgency-section">
-
-                    <label>
-                        Urgency Level
-                    </label>
-
-                    <div class="urgency-options">
-
-                        <label class="urgency-card critical">
-
-                            <input
-                                type="radio"
-                                name="urgency"
-                                value="Critical"
-                            >
-
-                            <span class="urgency-dot"></span>
-
-                            <div>
-                                <strong>Critical</strong>
-                                <small>Needed immediately</small>
-                            </div>
-
-                        </label>
-
-
-                        <label class="urgency-card urgent">
-
-                            <input
-                                type="radio"
-                                name="urgency"
-                                value="Urgent"
-                                checked
-                            >
-
-                            <span class="urgency-dot"></span>
-
-                            <div>
-                                <strong>Urgent</strong>
-                                <small>Needed within hours</small>
-                            </div>
-
-                        </label>
-
-
-                        <label class="urgency-card scheduled">
-
-                            <input
-                                type="radio"
-                                name="urgency"
-                                value="Scheduled"
-                            >
-
-                            <span class="urgency-dot"></span>
-
-                            <div>
-                                <strong>Scheduled</strong>
-                                <small>Planned requirement</small>
-                            </div>
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <!-- STOCK PREVIEW -->
-
-                <div class="stock-preview">
-
-                    <div class="stock-title">
-
-                        <div class="stock-icon">
-                            🏥
-                        </div>
-
-                        <div>
-
-                            <h3>Nearby Hospital Stock</h3>
-
-                            <p>
-                                Check available stock before contacting donors.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <div id="stockResult" class="stock-result">
-
-                        Select blood group and city to check nearby stock.
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-actions">
-
-                    <button
-                        type="button"
-                        class="secondary-btn"
-                        onclick="closeRequestForm()"
-                    >
-                        Cancel
-                    </button>
-
-                    <button
-                        type="submit"
-                        class="primary-btn"
-                    >
-                        Create Request →
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
-
-        <!-- ================= MY REQUESTS ================= -->
-
-        <section class="content-card">
-
-            <div class="section-header">
-
-                <div>
-                    <p class="small-heading">REQUEST HISTORY</p>
-                    <h2>My Requests</h2>
-                </div>
-
-                <select
-                    id="statusFilter"
-                    class="status-filter"
-                    onchange="renderRequests()"
-                >
-
-                    <option value="all">
-                        All Requests
-                    </option>
-
-                    <option value="Open">
-                        Open
-                    </option>
-
-                    <option value="Matched">
-                        Matched
-                    </option>
-
-                    <option value="Fulfilled">
-                        Fulfilled
-                    </option>
-
-                    <option value="Cancelled">
-                        Cancelled
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div id="requestsContainer">
-
-                <!-- JavaScript inserts requests here -->
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= INCOMING REQUESTS ================= -->
-
-        <section class="content-card">
-
-            <div class="section-header">
-
-                <div>
-                    <p class="small-heading">
-                        DONOR PANEL
-                    </p>
-
-                    <h2>
-                        Incoming Requests
-                    </h2>
-                </div>
-
-                <span class="demo-pill">
-                    Donor View
-                </span>
-
-            </div>
-
-
-            <div id="incomingRequests">
-
-                <!-- JavaScript inserts donor requests -->
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- ================= REQUEST DETAILS MODAL ================= -->
-
-    <div id="requestModal" class="modal">
-
-        <div class="modal-content">
-
-            <button
-                class="modal-close"
-                onclick="closeModal()"
-            >
-                ×
-            </button>
-
-            <div id="modalBody">
-
-            </div>
-
-        </div>
-
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="RaktSetu home">
+      <span class="brand-drop">♥</span>
+      <span>Rakt<span class="brand-red">Setu</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#requests">Requests</a>
+      <a href="#donor-panel">Donor responses</a>
+      <a href="#stock-panel">Hospital stock</a>
+    </nav>
+
+    <div class="header-user">
+      <span class="user-avatar">G</span>
+      <span>Goldy</span>
     </div>
+  </header>
 
+  <main class="page-shell" id="requests">
+    <section class="page-heading">
+      <div>
+        <p class="eyebrow">EMERGENCY BLOOD SUPPORT</p>
+        <h1>Blood <span>Requests</span></h1>
+        <p class="subtitle">
+          Create a request, check hospital stock, find compatible donors,
+          and track progress.
+        </p>
+      </div>
+      <button class="button button-primary" id="openRequestBtn" type="button">
+        + Create Request
+      </button>
+    </section>
 
-    <!-- ================= TOAST ================= -->
+    <section class="stats-grid" aria-label="Request statistics">
+      <article class="stat-card">
+        <span class="stat-icon">🩸</span>
+        <div><p>My requests</p><strong id="totalRequests">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">⌛</span>
+        <div><p>Open requests</p><strong id="openRequests">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">✓</span>
+        <div><p>Matched</p><strong id="matchedRequests">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">♥</span>
+        <div><p>Fulfilled</p><strong id="fulfilledRequests">0</strong></div>
+      </article>
+    </section>
 
-    <div id="toast" class="toast">
+    <section class="panel form-panel" id="requestSection" hidden>
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">NEW REQUEST</p>
+          <h2>Create Blood Request</h2>
+        </div>
+        <button class="icon-button" id="closeRequestBtn"
+          type="button" aria-label="Close request form">×</button>
+      </div>
 
-        <span id="toastMessage"></span>
+      <form id="requestForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="bloodGroup">Blood group <span>*</span></label>
+            <select id="bloodGroup" name="bloodGroup" required>
+              <option value="">Select blood group</option>
+              <option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option>
+              <option>O+</option><option>O-</option>
+            </select>
+          </div>
 
+          <div class="field">
+            <label for="units">Units needed <span>*</span></label>
+            <input id="units" name="units" type="number"
+              min="1" max="20" step="1"
+              placeholder="Example: 2" required>
+          </div>
+
+          <div class="field">
+            <label for="city">City <span>*</span></label>
+            <input id="city" name="city" type="text"
+              maxlength="60" placeholder="Example: Mathura" required>
+          </div>
+
+          <div class="field">
+            <label for="hospital">Hospital</label>
+            <input id="hospital" name="hospital" type="text"
+              maxlength="100" placeholder="Hospital name (optional)">
+          </div>
+
+          <div class="field">
+            <label for="neededBy">Required by <span>*</span></label>
+            <input id="neededBy" name="neededBy"
+              type="datetime-local" required>
+          </div>
+
+          <fieldset class="field urgency-field">
+            <legend>Urgency level</legend>
+            <div class="urgency-options">
+              <label class="urgency-option">
+                <input type="radio" name="urgency" value="Critical">
+                <span><strong>Critical</strong>
+                  <small>Needed immediately</small></span>
+              </label>
+
+              <label class="urgency-option selected">
+                <input type="radio" name="urgency"
+                  value="Urgent" checked>
+                <span><strong>Urgent</strong>
+                  <small>Needed within hours</small></span>
+              </label>
+
+              <label class="urgency-option">
+                <input type="radio" name="urgency" value="Scheduled">
+                <span><strong>Scheduled</strong>
+                  <small>Planned requirement</small></span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="stock-preview" id="stockResult" aria-live="polite">
+          Select a blood group and city to check registered hospital stock.
+        </div>
+
+        <div class="form-actions">
+          <button class="button button-outline" id="cancelFormBtn"
+            type="button">Cancel</button>
+          <button class="button button-primary" type="submit">
+            Create request
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading history-heading">
+        <div>
+          <p class="eyebrow">REQUEST HISTORY</p>
+          <h2>My Requests</h2>
+        </div>
+
+        <div class="filter-wrap">
+          <label for="requestSearch" class="visually-hidden">
+            Search requests
+          </label>
+          <input type="search" id="requestSearch" class="search-input"
+            placeholder="Search ID, city, hospital or blood group..."
+            aria-label="Search requests by ID, city, hospital or blood group">
+
+          <label for="statusFilter">Filter</label>
+          <select id="statusFilter">
+            <option value="all">All requests</option>
+            <option value="Open">Open</option>
+            <option value="Matched">Matched</option>
+            <option value="Fulfilled">Fulfilled</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="requestsContainer" class="request-list" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" id="donor-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">DONOR PANEL</p>
+          <h2>Incoming Requests</h2>
+          <p class="section-note">
+            Demo responses are stored in this browser only.
+          </p>
+        </div>
+      </div>
+      <div id="incomingRequests" class="request-list" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" id="stock-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">HOSPITAL SUPPORT</p>
+          <h2>Registered Blood Stock</h2>
+          <p class="section-note">
+            Sample inventory for demonstrating the hospital-first workflow.
+          </p>
+        </div>
+      </div>
+      <div id="inventoryContainer" class="inventory-grid"></div>
+    </section>
+
+    <p class="prototype-note">
+      Student project prototype · Sample donor and hospital data only ·
+      Not for real medical emergencies.
+    </p>
+  </main>
+
+  <div class="modal-backdrop" id="requestModal"
+    role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-card">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">REQUEST TRACKING</p>
+          <h2 id="modalTitle">Request detail</h2>
+        </div>
+        <button class="icon-button" id="closeModalBtn"
+          type="button" aria-label="Close details">×</button>
+      </div>
+      <div id="modalBody"></div>
     </div>
+  </div>
 
-
-    <script src="requests.js"></script>
-
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-mark">✓</span>
+    <span id="toastMessage"></span>
+  </div>
 </body>
-
 </html>
