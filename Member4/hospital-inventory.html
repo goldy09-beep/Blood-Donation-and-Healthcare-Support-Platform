@@ -11,6 +11,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
     <nav class="mainnav">
       <a href="hospital-inventory.html">Inventory</a>
       <a href="blood-stock-search.html">Stock Search</a>
@@ -23,10 +24,12 @@
 <div class="page-head">
   <p class="kicker">Hospital Inventory</p>
   <h1>Track and update your blood stock</h1>
-  <p>Add stock for each blood group. Saving the same hospital and blood group again updates the units.</p>
+  <p>Add, edit and monitor blood units. Saving the same hospital and blood group again updates the units.</p>
 </div>
 
 <main>
+
+  <div class="alert-banner" id="alertBanner" role="alert"></div>
 
   <div class="stat-grid three">
     <div class="stat-card">
@@ -43,10 +46,16 @@
     </div>
   </div>
 
+  <section>
+    <h2 class="section-title">Stock by blood group</h2>
+    <p class="sub" style="color:var(--muted);margin:-8px 0 14px;font-size:0.92rem">Click a group to filter the table below.</p>
+    <div class="group-grid" id="groupGrid"></div>
+  </section>
+
   <div class="grid-two">
 
-    <div class="card">
-      <h2>Add / update stock</h2>
+    <div class="card" style="align-self:start">
+      <h2 id="formTitle">Add / update stock</h2>
       <p class="sub">All fields are required.</p>
 
       <form id="stockForm" novalidate>
@@ -92,14 +101,38 @@
           <input type="date" id="lastUpdated" name="lastUpdated">
         </div>
 
-        <button type="submit" class="btn btn-primary">Save stock entry</button>
-        <div class="form-msg"></div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="saveBtn">Save stock entry</button>
+          <button type="button" class="btn btn-outline" id="cancelEdit" hidden>Cancel edit</button>
+        </div>
       </form>
     </div>
 
     <div class="card">
       <h2>Current stock</h2>
-      <p class="sub">Saved in your browser. Status: 5 or less is Critical, 6–20 Moderate, above 20 Healthy.</p>
+      <p class="sub">Saved in your browser. 5 or less is Critical, 6–20 Moderate, above 20 Healthy.</p>
+
+      <div class="toolbar">
+        <input type="search" id="invSearch" placeholder="Search hospital or city" autocomplete="off">
+        <select id="invGroup" aria-label="Filter by blood group">
+          <option value="">All groups</option>
+          <option>A+</option>
+          <option>A-</option>
+          <option>B+</option>
+          <option>B-</option>
+          <option>O+</option>
+          <option>O-</option>
+          <option>AB+</option>
+          <option>AB-</option>
+        </select>
+        <select id="invStatus" aria-label="Filter by status">
+          <option value="">All status</option>
+          <option>Healthy</option>
+          <option>Moderate</option>
+          <option>Critical</option>
+        </select>
+        <button type="button" class="btn btn-outline btn-sm" id="exportCsv">Download CSV</button>
+      </div>
 
       <div class="table-wrap">
         <table>
@@ -116,7 +149,7 @@
           <tbody id="invBody"></tbody>
         </table>
       </div>
-      <div class="empty-state" id="invEmpty">No stock entries yet. Add one using the form.</div>
+      <div class="empty-state" id="invEmpty"></div>
     </div>
 
   </div>
