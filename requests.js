@@ -1,6 +1,6 @@
 /* ==========================================================
    RaktSetu - Emergency Request and Matching Module
-   60% frontend milestone
+   100% final frontend demonstration
    HTML + CSS + Vanilla JavaScript
    Demo data is stored in localStorage, not a backend.
 ========================================================== */
@@ -195,7 +195,7 @@ function handleCreateRequest(event) {
     return showToast("Enter a whole number of units from 1 to 20.");
   }
 
-  if (city.length < 2) {
+  if (city.length < 2 || !/^[\p{L} .-]+$/u.test(city)) {
     return showToast("Please enter a valid city.");
   }
 
@@ -235,7 +235,7 @@ function handleCreateRequest(event) {
   }
 
   const request = {
-    id: "REQ" + Date.now().toString().slice(-7),
+    id: "REQ" + Date.now().toString().slice(-7) + Math.floor(Math.random() * 90 + 10),
     bloodGroup,
     units,
     city,
@@ -293,6 +293,7 @@ function allocateHospitalStock(stocks, unitsNeeded) {
   let remaining = unitsNeeded;
   let unitsAllocated = 0;
   const hospitalNames = [];
+  const allocations = [];
 
   stocks.forEach(stock => {
     if (remaining <= 0) return;
@@ -301,6 +302,7 @@ function allocateHospitalStock(stocks, unitsNeeded) {
 
     if (take > 0) {
       stock.units -= take;
+      allocations.push({ stockId: stock.id, units: take });
       remaining -= take;
       unitsAllocated += take;
 
@@ -312,7 +314,8 @@ function allocateHospitalStock(stocks, unitsNeeded) {
 
   return {
     unitsAllocated,
-    hospitalNames
+    hospitalNames,
+    allocations
   };
 }
 
@@ -340,7 +343,14 @@ function findMatchingDonors(requestedGroup, city) {
   return demoDonors
     .filter(donor =>
       donor.available &&
-      compatibleGroups.includes(donor.bloodGroup)
+      !requests.some(request =>
+        !["Cancelled", "Fulfilled"].includes(request.status) &&
+        (request.matches || []).some(match =>
+          match.donorId === donor.id && match.status === "Accepted"
+        )
+      ) &&
+      compatibleGroups.includes(donor.bloodGroup) &&
+      donor.city.toLowerCase() === city.toLowerCase()
     )
     .map(donor => ({
       ...donor,
@@ -820,10 +830,11 @@ function respondToRequest(requestId, donorId, response) {
     item => item.status === "Accepted"
   ).length;
 
-  if (acceptedCount > 0) {
+  const allocatedUnits = Number(request.inventoryAllocation?.unitsAllocated || 0);
+  if (allocatedUnits + acceptedCount >= Number(request.units)) {
     request.status = "Matched";
     request.note =
-      "At least one compatible donor accepted. Confirm units and arrangements with the hospital.";
+      "Enough demo donor commitments and hospital units are available to cover the requested quantity. Hospital confirmation is still required.";
   } else if (
     request.matches.every(item => item.status === "Declined")
   ) {
@@ -836,7 +847,9 @@ function respondToRequest(requestId, donorId, response) {
 
   showToast(
     response === "Accepted"
-      ? "Donor response accepted. Request marked matched for demo tracking."
+      ? request.status === "Matched"
+         ? "Required units covered by demo commitments. Request matched."
+         : "Donor accepted; more units are still required."
       : "Donor declined. Other pending donors can still respond."
   );
 }
@@ -856,6 +869,17 @@ function cancelRequest(requestId) {
 
   request.status = "Cancelled";
   request.note = "Cancelled by requester.";
+  // Release only stock reserved by this request. Older saved records
+  // may not contain item-level allocations and cannot be safely reversed.
+  const allocations = request.inventoryAllocation?.allocations || [];
+  allocations.forEach(entry => {
+    const stock = inventory.find(item => item.id === entry.stockId);
+    if (stock) stock.units += Number(entry.units) || 0;
+  });
+  if (allocations.length) {
+    request.inventoryAllocation = null;
+    saveInventory();
+  }
 
   saveRequests();
   closeModal();
