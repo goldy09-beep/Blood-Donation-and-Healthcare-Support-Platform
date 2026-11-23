@@ -11,6 +11,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
     <nav class="mainnav">
       <a href="hospital-inventory.html">Inventory</a>
       <a href="blood-stock-search.html">Stock Search</a>
@@ -23,13 +24,13 @@
 <div class="page-head">
   <p class="kicker">Blood Stock Search</p>
   <h1>Find blood stock near you</h1>
-  <p>Search hospitals by city and blood group. Results come from the stock saved in the Inventory page and update as you type.</p>
+  <p>Search hospitals by city and blood group. Turn on compatible groups to also see stock that can safely be given to the patient.</p>
 </div>
 
 <main>
   <div class="card" style="margin-bottom: 28px;">
     <h2>Search</h2>
-    <p class="sub">Leave a field empty to see all results.</p>
+    <p class="sub">Results update as you type. Leave a field empty to see all.</p>
 
     <form id="searchForm" novalidate>
       <div class="field-row">
@@ -38,7 +39,7 @@
           <input type="text" id="city" name="city" placeholder="e.g. Mathura" autocomplete="off">
         </div>
         <div class="field">
-          <label for="searchGroup">Blood group</label>
+          <label for="searchGroup">Blood group needed</label>
           <select id="searchGroup" name="searchGroup">
             <option value="">Any</option>
             <option>A+</option>
@@ -52,14 +53,35 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Search stock</button>
-      <button type="button" class="btn btn-outline" id="resetSearch">Reset</button>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="sortBy">Sort by</label>
+          <select id="sortBy" name="sortBy">
+            <option value="stock">Most stock first</option>
+            <option value="name">Hospital name (A-Z)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Options</label>
+          <div class="check-group">
+            <label class="check-row"><input type="checkbox" name="availableOnly"> In stock only</label>
+            <label class="check-row"><input type="checkbox" name="includeCompat"> Include compatible groups</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Search stock</button>
+        <button type="button" class="btn btn-outline" id="resetSearch">Reset</button>
+      </div>
     </form>
   </div>
 
   <div class="card">
     <h2>Results</h2>
     <p class="result-count" id="resultCount"></p>
+    <div class="match-note" id="matchNote"></div>
 
     <div class="table-wrap">
       <table>
@@ -70,12 +92,13 @@
             <th>Blood group</th>
             <th>Available</th>
             <th>Contact</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="resultsBody"></tbody>
       </table>
     </div>
-    <div class="empty-state" id="resultsEmpty">No hospitals match this search. Try a different city or blood group.</div>
+    <div class="empty-state" id="resultsEmpty">No hospitals match this search. Try a different city, or turn on compatible groups.</div>
   </div>
 </main>
 
