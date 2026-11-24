@@ -204,24 +204,8 @@ if (loginForm) {
 
         alert("Login successful!");
 
-        // Redirect according to role
-        if (matchedUser.role === "Donor") {
-
-            window.location.href = "../profile/donor-profile.html";
-
-        }
-
-        else if (matchedUser.role === "Hospital") {
-
-            window.location.href = "../profile/hospital-profile.html";
-
-        }
-
-        else {
-
-            window.location.href = "../../index.html";
-
-        }
+        // ✅ Login ke baad sabko Main Dashboard pe bhejo
+        window.location.href = "../../index.html";
 
     });
 
