@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Sign Up | RaktSetu</title>
 
     <link rel="stylesheet" href="../../css/style.css">
@@ -12,64 +12,150 @@
 
 <body class="auth-page">
 
-    <div class="auth-container">
+    <main class="auth-container signup-container">
 
-        <div class="auth-logo">
+        <a href="../../index.html" class="auth-logo">
             🩸 Rakt<span>Setu</span>
-        </div>
+        </a>
 
         <h1>Create Account</h1>
-
         <p class="auth-subtitle">
             Join RaktSetu and make a difference.
         </p>
 
+        <div id="signupMessage" class="signup-message"
+             role="status" aria-live="polite" hidden></div>
 
-        <form id="signupForm" class="auth-form">
+        <form id="signupForm" class="auth-form" novalidate>
 
-            <label>Full Name</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
+            <div class="signup-field">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name"
+                       placeholder="Enter your full name"
+                       autocomplete="name" required>
+            </div>
 
+            <div class="signup-field">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email"
+                       placeholder="Enter your email"
+                       autocomplete="email" required>
+            </div>
 
-            <label>Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
+            <div class="signup-field">
+                <label for="password">Password</label>
 
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password"
+                           placeholder="Create a strong password"
+                           autocomplete="new-password"
+                           minlength="8" required>
 
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Create password" required>
+                    <button type="button" class="password-toggle"
+                            data-target="password"
+                            aria-label="Show password"
+                            aria-pressed="false">
+                        Show
+                    </button>
+                </div>
 
+                <div class="password-strength-track">
+                    <div id="passwordStrengthBar"
+                         class="password-strength-bar"></div>
+                </div>
 
-            <label>Confirm Password</label>
-            <input type="password" id="confirmPassword"
-                   placeholder="Confirm password" required>
+                <p id="passwordStrengthText" class="field-hint">
+                    Use at least 8 characters.
+                </p>
+            </div>
 
+            <div class="signup-field">
+                <label for="confirmPassword">Confirm Password</label>
 
-            <label>Role</label>
-            <select id="userRole" required>
-                <option value="">Select Role</option>
-                <option value="Donor">Donor</option>
-                <option value="Hospital">Hospital</option>
-                <option value="Volunteer">Volunteer</option>
-                <option value="Recipient">Recipient</option>
-            </select>
+                <div class="password-wrapper">
+                    <input type="password" id="confirmPassword"
+                           name="confirmPassword"
+                           placeholder="Re-enter your password"
+                           autocomplete="new-password" required>
 
+                    <button type="button" class="password-toggle"
+                            data-target="confirmPassword"
+                            aria-label="Show confirm password"
+                            aria-pressed="false">
+                        Show
+                    </button>
+                </div>
 
-            <button type="submit" class="form-btn">
+                <p id="confirmPasswordMessage" class="field-hint"></p>
+            </div>
+
+            <div class="signup-field">
+                <label for="userRole">Register As</label>
+
+                <select id="userRole" name="userRole" required>
+                    <option value="">Select your role</option>
+                    <option value="Donor">Blood Donor</option>
+                    <option value="Hospital">Hospital</option>
+                    <option value="Volunteer">Volunteer</option>
+                    <option value="Recipient">Blood Recipient</option>
+                </select>
+            </div>
+
+            <!-- Donor/Recipient fields -->
+            <div id="bloodGroupField" class="signup-field" hidden>
+                <label for="bloodGroup">Blood Group</label>
+
+                <select id="bloodGroup" name="bloodGroup">
+                    <option value="">Select blood group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+
+            <!-- Hospital-only field -->
+            <div id="hospitalNameField" class="signup-field" hidden>
+                <label for="hospitalName">Hospital Name</label>
+                <input type="text" id="hospitalName" name="hospitalName"
+                       placeholder="Enter hospital name">
+            </div>
+
+            <!-- Volunteer-only field -->
+            <div id="cityField" class="signup-field" hidden>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city"
+                       placeholder="Enter your city" autocomplete="address-level2">
+            </div>
+
+            <label class="terms-label">
+                <input type="checkbox" id="terms" name="terms" required>
+                <span>
+                    I agree to the <a href="#" id="termsLink">Terms &amp; Conditions</a>.
+                </span>
+            </label>
+
+            <button type="submit" class="form-btn" id="signupButton">
                 Create Account
             </button>
 
         </form>
-
 
         <p class="switch-text">
             Already have an account?
             <a href="login.html">Login</a>
         </p>
 
-    </div>
+        <p class="signup-footer">
+            Your information should be handled securely and responsibly.
+        </p>
 
+    </main>
 
     <script src="../../js/auth.js"></script>
-
 </body>
 </html>

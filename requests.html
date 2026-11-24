@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RaktSetu blood donation and emergency request prototype">
+  <title>RaktSetu | Blood Requests</title>
+  <link rel="stylesheet" href="requests.css">
+  <script src="requests.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#requests" aria-label="RaktSetu home"><span class="brand-drop">♥</span><span>Rakt<span class="brand-red">Setu</span></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#requests">Requests</a>
+      <a href="#donor-panel">Donor responses</a>
+      <a href="#stock-panel">Hospital stock</a>
+    </nav>
+    <div class="header-user"><span class="user-avatar">G</span><span>Goldy</span></div>
+  </header>
+  <main class="page-shell" id="requests">
+    <section class="page-heading">
+      <div><p class="eyebrow">EMERGENCY BLOOD SUPPORT</p><h1>Blood <span>Requests</span></h1><p class="subtitle">Create a request, check hospital stock, find compatible donors, and track progress.</p></div>
+      <button class="button button-primary" id="openRequestBtn" type="button">+ Create Request</button>
+    </section>
+    <section class="stats-grid" aria-label="Request statistics">
+      <article class="stat-card"><span class="stat-icon">🩸</span><div><p>My requests</p><strong id="totalRequests">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon">⌛</span><div><p>Open requests</p><strong id="openRequests">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon">✓</span><div><p>Matched</p><strong id="matchedRequests">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon">♥</span><div><p>Fulfilled</p><strong id="fulfilledRequests">0</strong></div></article>
+    </section>
+    <section class="panel form-panel" id="requestSection" hidden>
+      <div class="panel-heading"><div><p class="eyebrow">NEW REQUEST</p><h2>Create Blood Request</h2></div><button class="icon-button" id="closeRequestBtn" type="button" aria-label="Close request form">×</button></div>
+      <form id="requestForm">
+        <div class="form-grid">
+          <div class="field"><label for="bloodGroup">Blood group <span>*</span></label><select id="bloodGroup" name="bloodGroup" required><option value="">Select blood group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+          <div class="field"><label for="units">Units needed <span>*</span></label><input id="units" name="units" type="number" min="1" max="20" step="1" placeholder="Example: 2" required></div>
+          <div class="field"><label for="city">City <span>*</span></label><input id="city" name="city" type="text" maxlength="60" placeholder="Example: Mathura" required></div>
+          <div class="field"><label for="hospital">Hospital</label><input id="hospital" name="hospital" type="text" maxlength="100" placeholder="Hospital name (optional)"></div>
+          <div class="field"><label for="neededBy">Required by <span>*</span></label><input id="neededBy" name="neededBy" type="datetime-local" required></div>
+          <fieldset class="field urgency-field"><legend>Urgency level</legend><div class="urgency-options">
+            <label class="urgency-option"><input type="radio" name="urgency" value="Critical"><span><strong>Critical</strong><small>Needed immediately</small></span></label>
+            <label class="urgency-option selected"><input type="radio" name="urgency" value="Urgent" checked><span><strong>Urgent</strong><small>Needed within hours</small></span></label>
+            <label class="urgency-option"><input type="radio" name="urgency" value="Scheduled"><span><strong>Scheduled</strong><small>Planned requirement</small></span></label>
+          </div></fieldset>
+        </div>
+        <div class="stock-preview" id="stockResult" aria-live="polite">Select a blood group and city to check registered hospital stock.</div>
+        <div class="form-actions"><button class="button button-outline" id="cancelFormBtn" type="button">Cancel</button><button class="button button-primary" type="submit">Create request</button></div>
+      </form>
+    </section>
+    <section class="panel">
+      <div class="panel-heading history-heading"><div><p class="eyebrow">REQUEST HISTORY</p><h2>My Requests</h2></div><div class="filter-wrap">
+        <label for="requestSearch" class="visually-hidden">Search requests</label><input type="search" id="requestSearch" class="search-input" placeholder="Search ID, city, hospital or blood group..." aria-label="Search requests by ID, city, hospital or blood group">
+        <label for="statusFilter">Filter</label><select id="statusFilter"><option value="all">All requests</option><option value="Open">Open</option><option value="Matched">Matched</option><option value="Fulfilled">Fulfilled</option><option value="Cancelled">Cancelled</option></select>
+      </div></div>
+      <div id="requestsContainer" class="request-list" aria-live="polite"></div>
+    </section>
+    <section class="panel" id="donor-panel"><div class="panel-heading"><div><p class="eyebrow">DONOR PANEL</p><h2>Incoming Requests</h2><p class="section-note">Demo responses are stored in this browser only.</p></div></div><div id="incomingRequests" class="request-list" aria-live="polite"></div></section>
+    <section class="panel" id="stock-panel"><div class="panel-heading"><div><p class="eyebrow">HOSPITAL SUPPORT</p><h2>Registered Blood Stock</h2><p class="section-note">Sample inventory for demonstrating the hospital-first workflow.</p></div></div><div id="inventoryContainer" class="inventory-grid"></div></section>
+    <p class="prototype-note">Student project prototype · Sample donor and hospital data only · Not for real medical emergencies.</p>
+  </main>
+  <div class="modal-backdrop" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden><div class="modal-card"><div class="modal-heading"><div><p class="eyebrow">REQUEST TRACKING</p><h2 id="modalTitle">Request detail</h2></div><button class="icon-button" id="closeModalBtn" type="button" aria-label="Close details">×</button></div><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-mark">✓</span><span id="toastMessage"></span></div>
+</body>
+</html>
