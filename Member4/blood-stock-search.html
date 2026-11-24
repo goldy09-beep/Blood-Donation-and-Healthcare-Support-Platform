@@ -23,19 +23,19 @@
 <div class="page-head">
   <p class="kicker">Blood Stock Search</p>
   <h1>Find blood stock near you</h1>
-  <p>Search hospitals by city and blood group to see who currently has stock available.</p>
+  <p>Search hospitals by city and blood group. Results come from the stock saved in the Inventory page and update as you type.</p>
 </div>
 
 <main>
   <div class="card" style="margin-bottom: 28px;">
     <h2>Search</h2>
-    <p class="sub">Basic search form — live filtering of results will be added next.</p>
+    <p class="sub">Leave a field empty to see all results.</p>
 
-    <form id="searchForm" class="js-basic-form" data-success="Showing sample matches below for this search.">
+    <form id="searchForm" novalidate>
       <div class="field-row">
         <div class="field">
           <label for="city">City</label>
-          <input type="text" id="city" name="city" placeholder="e.g. Mathura">
+          <input type="text" id="city" name="city" placeholder="e.g. Mathura" autocomplete="off">
         </div>
         <div class="field">
           <label for="searchGroup">Blood group</label>
@@ -53,48 +53,29 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Search stock</button>
-      <div class="form-msg"></div>
+      <button type="button" class="btn btn-outline" id="resetSearch">Reset</button>
     </form>
   </div>
 
   <div class="card">
-    <h2>Sample results</h2>
-    <p class="sub">Placeholder hospitals — will connect to real inventory data at 100%.</p>
+    <h2>Results</h2>
+    <p class="result-count" id="resultCount"></p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Hospital</th>
-          <th>City</th>
-          <th>Blood group</th>
-          <th>Available</th>
-          <th>Contact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>City Care Hospital</td>
-          <td>Mathura</td>
-          <td>O+</td>
-          <td><span class="stock-pill"><span class="stock-dot high"></span>42 units</span></td>
-          <td>+91 98XXXXXX01</td>
-        </tr>
-        <tr>
-          <td>Sanjeevani Hospital</td>
-          <td>Mathura</td>
-          <td>B-</td>
-          <td><span class="stock-pill"><span class="stock-dot mid"></span>9 units</span></td>
-          <td>+91 98XXXXXX02</td>
-        </tr>
-        <tr>
-          <td>Prakash Nursing Home</td>
-          <td>Vrindavan</td>
-          <td>AB-</td>
-          <td><span class="stock-pill"><span class="stock-dot low"></span>2 units</span></td>
-          <td>+91 98XXXXXX03</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Hospital</th>
+            <th>City</th>
+            <th>Blood group</th>
+            <th>Available</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <div class="empty-state" id="resultsEmpty">No hospitals match this search. Try a different city or blood group.</div>
   </div>
 </main>
 
