@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RaktSetu — Project Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      color: white;
+      padding: 40px 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .header h1 {
+      font-size: 3em;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+    .header h1 span { color: #ef4444; }
+    .header p {
+      font-size: 1.1em;
+      color: #aaa;
+      margin-top: 8px;
+    }
+    .badge {
+      display: inline-block;
+      background: #ef4444;
+      color: white;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.8em;
+      margin-top: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(239,68,68,0.5);
+      box-shadow: 0 20px 40px rgba(239,68,68,0.15);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .card-icon {
+      font-size: 2.2em;
+      width: 55px;
+      height: 55px;
+      background: rgba(239,68,68,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-title { font-size: 1.2em; font-weight: 700; }
+    .card-member { font-size: 0.8em; color: #ef4444; font-weight: 600; margin-top: 2px; }
+    .card-desc { font-size: 0.9em; color: #bbb; margin-bottom: 20px; line-height: 1.6; }
+    .links { display: flex; flex-direction: column; gap: 10px; }
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+    .link-btn:hover {
+      background: rgba(239,68,68,0.3);
+      border-color: #ef4444;
+      padding-left: 22px;
+    }
+    .link-btn .dot { font-size: 1.2em; }
+    .section-title {
+      text-align: center;
+      font-size: 1em;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin: 40px auto 20px;
+      max-width: 1200px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #555;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Rakt<span>Setu</span></h1>
+    <p>Blood Donation & Healthcare Support Platform</p>
+    <span class="badge">🚀 Project Hub — All Pages</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- MAIN APP -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🏠</div>
+        <div>
+          <div class="card-title">Main Application</div>
+          <div class="card-member">Member 2 — Govind Sharma</div>
+        </div>
+      </div>
+      <p class="card-desc">Donor Management Module — Live Emergency SOS, Radar Scanner, Smart Blood Cross-Matching, Gamification Tiers & more.</p>
+      <div class="links">
+        <a class="link-btn" href="index.html"><span class="dot">🔴</span> Main Donor Dashboard</a>
+        <a class="link-btn" href="requests.html"><span class="dot">📋</span> Blood Requests Page</a>
+      </div>
+    </div>
+
+    <!-- AUTH PAGES -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🔐</div>
+        <div>
+          <div class="card-title">Authentication</div>
+          <div class="card-member">Login / Signup System</div>
+        </div>
+      </div>
+      <p class="card-desc">User authentication flow — Role selection, donor/hospital signup, and secure login pages.</p>
+      <div class="links">
+        <a class="link-btn" href="pages/auth/role-selection.html"><span class="dot">👥</span> Role Selection</a>
+        <a class="link-btn" href="pages/auth/login.html"><span class="dot">🔑</span> Login Page</a>
+        <a class="link-btn" href="pages/auth/signup.html"><span class="dot">✍️</span> Signup Page</a>
+      </div>
+    </div>
+
+    <!-- PROFILE PAGES -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">👤</div>
+        <div>
+          <div class="card-title">User Profiles</div>
+          <div class="card-member">Donor & Hospital Profiles</div>
+        </div>
+      </div>
+      <p class="card-desc">Profile management for donors and hospitals — view and edit personal and medical information.</p>
+      <div class="links">
+        <a class="link-btn" href="pages/profile/donor-profile.html"><span class="dot">🩸</span> Donor Profile</a>
+        <a class="link-btn" href="pages/profile/hospital-profile.html"><span class="dot">🏥</span> Hospital Profile</a>
+        <a class="link-btn" href="pages/profile/edit-profile.html"><span class="dot">✏️</span> Edit Profile</a>
+      </div>
+    </div>
+
+    <!-- MEMBER 4 PAGES -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🏨</div>
+        <div>
+          <div class="card-title">Hospital & Inventory</div>
+          <div class="card-member">Member 4</div>
+        </div>
+      </div>
+      <p class="card-desc">Blood stock management, hospital inventory tracking, volunteer dashboard, and healthcare information hub.</p>
+      <div class="links">
+        <a class="link-btn" href="Member4/blood-stock-search.html"><span class="dot">🔍</span> Blood Stock Search</a>
+        <a class="link-btn" href="Member4/hospital-inventory.html"><span class="dot">📦</span> Hospital Inventory</a>
+        <a class="link-btn" href="Member4/healthcare-info.html"><span class="dot">ℹ️</span> Healthcare Info</a>
+        <a class="link-btn" href="Member4/volunteer-dashboard.html"><span class="dot">🙋</span> Volunteer Dashboard</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>RaktSetu — Healthcare Support Platform &nbsp;|&nbsp; Group Project</p>
+  </div>
+
+</body>
+</html>

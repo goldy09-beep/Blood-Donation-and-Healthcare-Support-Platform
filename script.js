@@ -748,14 +748,34 @@ function closeModal(modalId) {
   if (modal) modal.classList.remove('active');
 }
 
-// Toast Alert
+// Toast Alert — Fixed: creates floating toast directly on body
+var _rsToastEl = null;
+var _rsToastTimer = null;
+
 function showToast(msg) {
-  const t = document.getElementById('toast-banner');
-  if (t) {
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 4000);
+  // Create toast element once and attach directly to body
+  if (!_rsToastEl) {
+    _rsToastEl = document.createElement('div');
+    _rsToastEl.style.cssText = [
+      'position:fixed', 'bottom:28px', 'right:28px',
+      'z-index:999999', 'background:#0f0c29', 'color:#fff',
+      'border-left:4px solid #ef4444', 'padding:14px 20px',
+      'border-radius:10px', 'font-size:14px', 'font-weight:600',
+      'min-width:280px', 'max-width:420px',
+      'box-shadow:0 8px 30px rgba(0,0,0,0.4)',
+      'font-family:Segoe UI,sans-serif', 'line-height:1.5',
+      'display:none', 'transition:opacity 0.3s'
+    ].join(';');
+    document.body.appendChild(_rsToastEl);
   }
+  _rsToastEl.textContent = msg;
+  _rsToastEl.style.display = 'block';
+  _rsToastEl.style.opacity = '1';
+  clearTimeout(_rsToastTimer);
+  _rsToastTimer = setTimeout(function() {
+    _rsToastEl.style.opacity = '0';
+    setTimeout(function() { _rsToastEl.style.display = 'none'; }, 300);
+  }, 4000);
 }
 
 // ---------- Initialization ----------
