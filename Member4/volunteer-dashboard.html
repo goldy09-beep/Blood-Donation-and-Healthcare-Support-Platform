@@ -11,6 +11,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a href="hospital-inventory.html" class="brand">Rakt<span>Setu</span> <small>HOSPITAL PANEL</small></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
     <nav class="mainnav">
       <a href="hospital-inventory.html">Inventory</a>
       <a href="blood-stock-search.html">Stock Search</a>
@@ -23,7 +24,7 @@
 <div class="page-head">
   <p class="kicker">Volunteer Dashboard</p>
   <h1>Volunteers keeping the network running</h1>
-  <p>Register volunteers, log the drives they organise, and watch the numbers update automatically.</p>
+  <p>Register volunteers, log the drives they organise, and watch levels, rankings and stats update automatically.</p>
 </div>
 
 <main>
@@ -65,7 +66,6 @@
             <input type="tel" id="volPhone" name="volPhone" placeholder="10-digit number" maxlength="10">
           </div>
           <button type="submit" class="btn btn-primary">Sign up</button>
-          <div class="form-msg"></div>
         </form>
       </div>
 
@@ -85,18 +85,32 @@
             <input type="number" id="driveDonors" name="driveDonors" min="0" max="1000" placeholder="0">
           </div>
           <button type="submit" class="btn btn-primary">Log drive</button>
-          <div class="form-msg"></div>
         </form>
       </div>
 
     </div>
 
-    <div class="card" style="align-self: start;">
-      <h2>Current volunteers</h2>
-      <p class="sub">Ranked by drives organised.</p>
+    <div class="stack" style="align-self:start">
 
-      <div id="volList"></div>
-      <div class="empty-state" id="volEmpty">No volunteers yet. Be the first to sign up.</div>
+      <div class="card">
+        <h2>Current volunteers</h2>
+        <p class="sub">Ranked by drives. Levels: Bronze 1+, Silver 3+, Gold 5+ drives.</p>
+
+        <div class="toolbar">
+          <input type="search" id="volSearch" placeholder="Search by name or city" autocomplete="off">
+        </div>
+
+        <div id="volList"></div>
+        <div class="empty-state" id="volEmpty"></div>
+      </div>
+
+      <div class="card">
+        <h2>Recent activity</h2>
+        <p class="sub">Last 5 drives logged.</p>
+        <div id="activityList"></div>
+        <div class="empty-state" id="activityEmpty">No drives logged yet. Use the Log a drive form.</div>
+      </div>
+
     </div>
 
   </div>
