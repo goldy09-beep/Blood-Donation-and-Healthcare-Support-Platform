@@ -126,8 +126,7 @@
 
     '<li><div class="rs-divider"></div></li>' +
 
-    '<li>' + navLink('pages/profile/donor-profile.html',    'fa-user',            'Donor Profile')   + '</li>' +
-    '<li>' + navLink('pages/profile/hospital-profile.html', 'fa-hospital',        'Hospital Profile')+ '</li>' +
+    '<li><a href="' + root(currentUser && currentUser.role === 'Hospital' ? 'pages/profile/hospital-profile.html' : 'pages/profile/donor-profile.html') + '" class="fa-user"><i class="fa-solid fa-circle-user"></i> My Profile</a></li>' +
 
     '<li><div class="rs-divider"></div></li>' +
 
