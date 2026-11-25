@@ -1,14 +1,3 @@
-/* ============================================
-   RaktSetu — Member 4: Hospital & Healthcare
-   100% milestone
-   - localStorage (inventory, volunteers, activity)
-   - validation + toast notifications + confirm modal
-   - edit / delete / filter / CSV export (inventory)
-   - blood-group compatibility matching (search)
-   - volunteer levels, search, activity log
-   - eligibility checker (healthcare info)
-   - mobile menu
-   ============================================ */
 
 var KEYS = {
   inventory: 'raktsetu_inventory',
