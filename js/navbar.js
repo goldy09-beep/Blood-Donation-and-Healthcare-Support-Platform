@@ -93,6 +93,29 @@
     #rs-navbar .rs-logo i,
     #rs-navbar .rs-user i,
     #rs-navbar .rs-btn-logout i { margin-right: 5px; font-size: 0.9em; }
+
+    /* Hamburger button */
+    #rs-hamburger {
+      display: none; background: none; border: none;
+      color: white; font-size: 1.3em; cursor: pointer;
+      padding: 6px; margin-left: auto; flex-shrink: 0;
+    }
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      #rs-hamburger { display: block; }
+      #rs-navbar .rs-user { display: none; }
+      #rs-navbar .rs-nav {
+        display: none; flex-direction: column; align-items: flex-start;
+        position: absolute; top: 52px; left: 0; right: 0;
+        background: #0f0c29; padding: 10px 16px 16px;
+        border-bottom: 2px solid #ef4444;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        gap: 2px; z-index: 9998;
+      }
+      #rs-navbar .rs-nav.rs-open { display: flex; }
+      #rs-navbar .rs-nav a { font-size: 0.9em; padding: 10px 12px; width: 100%; border-radius: 8px; }
+      #rs-navbar .rs-nav .rs-divider { width: 100%; height: 1px; margin: 4px 0; }
+    }
   `;
   document.head.appendChild(style);
 
@@ -119,7 +142,7 @@
   navbar.id = 'rs-navbar';
   navbar.innerHTML = '<div class="rs-inner">' +
     '<a href="' + root('index.html') + '" class="rs-logo"><i class="fa-solid fa-droplet"></i>Rakt<span>Setu</span></a>' +
-    '<ul class="rs-nav">' +
+    '<ul class="rs-nav" id="rs-nav-list">' +
 
     '<li>' + navLink('index.html',                          'fa-gauge',           'Dashboard')       + '</li>' +
     '<li>' + navLink('requests.html',                       'fa-clipboard-list',  'Requests')        + '</li>' +
@@ -136,6 +159,7 @@
     '<li>' + navLink('Member4/volunteer-dashboard.html',    'fa-people-group',    'Volunteers')      + '</li>' +
 
     '</ul>' +
+    '<button id="rs-hamburger" aria-label="Toggle menu" onclick="document.getElementById(\'rs-nav-list\').classList.toggle(\'rs-open\');this.innerHTML=document.getElementById(\'rs-nav-list\').classList.contains(\'rs-open\')?\'<i class=\\\"fa-solid fa-xmark\\\"></i>\":\'<i class=\\\"fa-solid fa-bars\\\"></i>\'"><i class="fa-solid fa-bars"></i></button>' +
     userHTML +
     '</div>';
 
