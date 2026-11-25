@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile | RaktSetu</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-logo">
+            🩸 Rakt<span>Setu</span>
+        </div>
+
+        <h1>Edit Profile</h1>
+
+        <p class="auth-subtitle">
+            Keep your information updated.
+        </p>
+
+
+        <form id="editProfileForm" class="auth-form">
+
+            <label>Full Name</label>
+            <input type="text" id="name" required>
+
+
+            <label>Email</label>
+            <input type="email" id="email" required>
+
+
+            <label>Phone</label>
+            <input type="tel" id="phone" placeholder="Enter phone number">
+
+
+            <label>City</label>
+            <input type="text" id="city" placeholder="Enter city">
+
+
+            <label>Blood Group</label>
+
+            <select id="bloodGroup">
+
+                <option value="">Select Blood Group</option>
+
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+
+            </select>
+
+
+            <button type="submit" class="form-btn">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <script src="../../js/auth.js"></script>
+
+</body>
+</html>
