@@ -8,6 +8,18 @@
     <title>Donor Profile | RaktSetu</title>
 
     <link rel="stylesheet" href="../../css/style.css">
+    <script>
+      // Auth guard — agar login nahi kiya toh login pe bhejo
+      (function() {
+        var user = localStorage.getItem('currentUser');
+        if (!user) { window.location.replace('../../pages/auth/login.html'); }
+        else {
+          var u = JSON.parse(user);
+          // Agar Hospital role hai toh hospital profile pe bhejo
+          if (u.role === 'Hospital') { window.location.replace('hospital-profile.html'); }
+        }
+      })();
+    </script>
 </head>
 
 <body class="profile-page">
